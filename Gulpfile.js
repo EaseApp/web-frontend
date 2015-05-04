@@ -3,7 +3,7 @@ var gulp = require('gulp'),
 	autoprefix = require('gulp-autoprefixer'),
 	notify = require('gulp-notify'),
 	bower = require('gulp-bower'),
-	gls = require('gulp-live-server')
+	gls = require('gulp-live-server'),
 	sourcemaps = require('gulp-sourcemaps');
 
 
