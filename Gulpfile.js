@@ -59,6 +59,13 @@ gulp.task('css', function(){
 		.pipe(gulp.dest('dist/stylesheets'));
 });
 
+gulp.task('test', function(done) {
+  karma.start({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done);
+});
+
 gulp.task('watch', function(){
 	gulp.watch(config.sassPath + '/**/*.scss', ['css']);
 	var watcher  = watchify(browserify({
@@ -78,4 +85,4 @@ gulp.task('watch', function(){
 	    .pipe(gulp.dest(config.DEST));
 });
 
-gulp.task('default', ['icons','css','server','watch']);
+gulp.task('default', ['icons','css','server','watch', 'test']);
