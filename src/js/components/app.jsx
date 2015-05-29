@@ -8,7 +8,7 @@ var React = require('react');
 var App = React.createClass({
 	render: function(){
 		return (
-			<h1>Hello world from React!</h1>
+			<h1>{this.props.title}</h1>
 		);
 	}
 });

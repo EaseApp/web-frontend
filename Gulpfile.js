@@ -9,7 +9,8 @@ var gulp = require('gulp'),
 	reactify = require('reactify'),
 	watchify = require('watchify'),
 	streamify = require('gulp-streamify'),
-	source = require('vinyl-source-stream');
+	source = require('vinyl-source-stream'),
+	karma = require('karma').server;
 
 
 var config = {
@@ -59,11 +60,11 @@ gulp.task('css', function(){
 		.pipe(gulp.dest('dist/stylesheets'));
 });
 
-gulp.task('test', function(done) {
+gulp.task('test', function() {
   karma.start({
-    configFile: __dirname + '/karma.conf.js',
-    singleRun: true
-  }, done);
+    configFile: __dirname + '/karma.config.js',
+    singleRun: false
+  });
 });
 
 gulp.task('watch', function(){

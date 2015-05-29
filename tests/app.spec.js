@@ -4,9 +4,21 @@
 'use strict';
 
 var React = require('react/addons');
+var TestUtils = React.addons.TestUtils;
+var container = document.createElement("div");
 
 describe('App tests', function(){
-	it('should be true', function(){
-		expect(true).toBe(true);		
+	var instance;
+	var App = require('../src/js/components/App.jsx')
+	
+	beforeEach(function(){
+		
 	});
+	
+	it('should display the title passed in', function(){
+		var title = "A new value";
+		instance = TestUtils.renderIntoDocument(<App title={title} />);
+		var heading = TestUtils.findRenderedDOMComponentWithTag(instance, 'h1');
+		expect(heading.getDOMNode().textContent).toEqual(title);	
+	} )
 });
