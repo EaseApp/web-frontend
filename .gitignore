@@ -1,2 +1,5 @@
 node_modules
-public/lib/**
+bower_components
+dist/
+.DS_Store
+typings

@@ -4,12 +4,20 @@ var gulp = require('gulp'),
 	notify = require('gulp-notify'),
 	bower = require('gulp-bower'),
 	gls = require('gulp-live-server'),
-	sourcemaps = require('gulp-sourcemaps');
+	sourcemaps = require('gulp-sourcemaps'),
+	browserify = require('browserify'),
+	reactify = require('reactify'),
+	watchify = require('watchify'),
+	streamify = require('gulp-streamify'),
+	source = require('vinyl-source-stream');
 
 
 var config = {
 	sassPath: './resources/sass',
-	bowerDir: './public/lib'
+	bowerDir: './bower_components',
+	DEST: './dist/',
+	OUT: 'build.js',
+	ENTRY_POINT: 'src/js/main.js'
 }
 
 gulp.task('server', function(){
@@ -18,10 +26,15 @@ gulp.task('server', function(){
     gulp.watch(['app.js', 'routes/**/*.js'], ['server']);
 });
 
-gulp.task('bower', function(){
-	return bower()
-		.pipe(gulp.dest(config.bowerDir))
+gulp.task('browserify', function(){
+	var b = browserify();
+	b.transform(reactify);
+	b.add('src/js/main.js');
+	return b.bundle()
+		.pipe(source(config.ENTRY_POINT))
+		.pipe(gulp.dest(config.DEST));
 });
+
 
 gulp.task('icons', function(){
 	return gulp.src(config.bowerDir + '/fontawesome/fonts/**.*')
@@ -34,7 +47,7 @@ gulp.task('css', function(){
 			"sourcemap=none":true,
 			style: 'compressed',
 			loadPath: [
-				'./resources/sass',
+				'src/stylesheets/sass',
 				config.bowerDir + '/bootstrap-sass-official/assets/stylesheets',
 				config.bowerDir + '/fontawesome/scss'
 			]
@@ -43,11 +56,26 @@ gulp.task('css', function(){
 				return "Error: " + error.message;
 			})))
 		.pipe(autoprefix('last 2 version'))
-		.pipe(gulp.dest('./public/stylesheets'));
+		.pipe(gulp.dest('dist/stylesheets'));
 });
 
 gulp.task('watch', function(){
 	gulp.watch(config.sassPath + '/**/*.scss', ['css']);
+	var watcher  = watchify(browserify({
+	    entries: [config.ENTRY_POINT],
+	    transform: [reactify],
+	    debug: true,
+	    cache: {}, packageCache: {}, fullPaths: true
+	  }));
+  	return watcher.on('update', function () {
+	    watcher.bundle()
+	      .pipe(source(config.OUT))
+	      .pipe(gulp.dest(config.DEST));
+	      console.log('Updated');
+	  })
+	    .bundle()
+	    .pipe(source(config.OUT))
+	    .pipe(gulp.dest(config.DEST));
 });
 
-gulp.task('default', ['bower','icons','css','server','watch']);
+gulp.task('default', ['icons','css','server','watch']);
