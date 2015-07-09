@@ -30,7 +30,11 @@
     "gulp-ruby-sass": "^0.7.1",
     "gulp-sourcemaps": "^1.5.1",
     "gulp-streamify": "0.0.5",
+    "jasmine-core": "^2.3.4",
     "karma-browserify": "^4.2.1",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^0.2.0",
     "reactify": "^1.1.1",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.2.1"
