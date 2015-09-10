@@ -1,4 +1,6 @@
 extends layout
 
 block content
-  div.container
+  div.container(ng-container='HomeController as Home')
+    button(ng-click="count = count + 1" ng-init="count=0") Click me
+    span count {{count}}

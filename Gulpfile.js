@@ -6,7 +6,6 @@ var gulp = require('gulp'),
 	gls = require('gulp-live-server'),
 	sourcemaps = require('gulp-sourcemaps'),
 	browserify = require('browserify'),
-	reactify = require('reactify'),
 	watchify = require('watchify'),
 	streamify = require('gulp-streamify'),
 	source = require('vinyl-source-stream'),
@@ -19,7 +18,7 @@ var config = {
 	DEST: './dist/',
 	OUT: 'build.js',
 	ENTRY_POINT: 'src/js/main.js'
-}
+};
 
 gulp.task('server', function(){
 	var server = gls.new('bin/www');
@@ -29,7 +28,6 @@ gulp.task('server', function(){
 
 gulp.task('browserify', function(){
 	var b = browserify();
-	b.transform(reactify);
 	b.add('src/js/main.js');
 	return b.bundle()
 		.pipe(source(config.ENTRY_POINT))
@@ -71,7 +69,6 @@ gulp.task('watch', function(){
 	gulp.watch(config.sassPath + '/**/*.scss', ['css']);
 	var watcher  = watchify(browserify({
 	    entries: [config.ENTRY_POINT],
-	    transform: [reactify],
 	    debug: true,
 	    cache: {}, packageCache: {}, fullPaths: true
 	  }));

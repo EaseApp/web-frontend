@@ -1,7 +1,8 @@
 doctype html
-html
+html(ng-app='easeApp')
   head
     title= title
+    script(type='text/javascript', src='build.js')
   body
     block content
-    script(type='text/javascript', src='build.js')
+    
