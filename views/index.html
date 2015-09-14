@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="easeApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Ease</title>
+  <script type="text/javascript" src="build.js"></script>
+</head>
+<body>
+  <div class="container" ng-controller="HomeController as home">
+    <button type="button" name="button" ng-click="count=count+1" ng-init="count=0">Click me</button>
+    <span>Count: {{count}}</span>
+  </div>
+</body>
+</html>
