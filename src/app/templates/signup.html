@@ -1,0 +1,36 @@
+<md-dialog id="signup-dialog" aria-label="Sign Up Dialog">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Sign Up</h2>
+      <span flex></span>
+      <md-button class="md-icon-button close" ng-click="close()">
+        <md-icon md-svg-src="assets/images/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+     <img id="google-icon" class="social-login" src="assets/images/googlePlusLogo.png" alt="Google+ Login">
+     <img class="social-login" src="assets/images/facebookLogo.png" alt="Facebook Login">
+    <h3>OR</h3>
+    <form action"#" method="post" name="signUpForm">
+      <md-input-container>
+       <label>Email</label>
+       <input ng-model="signup.email" name="email" type="email" ng-required="true" required>
+       <div ng-messages="signUpForm.email.$error" ng-if='submitted'>
+         <div ng-message="required">Required</div>
+         <div ng-message="email">Not a valid email</div>
+       </div>
+      </md-input-container>
+      <md-input-container>
+       <label>Password</label>
+       <input ng-model="signup.password" name="password" type="password" ng-required="true" required>
+       <div ng-messages="signUpForm.password.$error" ng-if='submitted'>
+         <div ng-message="required">Required</div>
+       </div>
+      </md-input-container>
+      <md-button class="md-primary md-raised" ng-click="submitted=true">
+        Sign Up
+      </md-button>
+    </form>
+  </md-dialog-content>
+</md-dialog>
