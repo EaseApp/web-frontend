@@ -1,39 +1,60 @@
-(function() {
-  'use strict';
+angular.module('easeApp').controller('MainController', ['$scope', '$mdSidenav', '$mdDialog', function($scope, $mdSidenav, $mdDialog){
 
-  angular
-    .module('easeApp')
-    .controller('MainController', MainController);
+  $(document).ready(function() {
+    $('a[href*=#]:not([href=#])').click(function() {
+      if($mdSidenav('left').isOpen()) {
+        $mdSidenav('left').toggle();
+      }
+      if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+        if (target.length) {
+          var position = target.position().top + $("md-content").scrollTop();
+          $('#outer-wrapper').animate({
+            scrollTop: position
+          }, 1000);
 
-  /** @ngInject */
-  function MainController($timeout, webDevTec, toastr) {
-    var vm = this;
+          return false;
+        }
+      }
+    });
+  });
 
-    vm.awesomeThings = [];
-    vm.classAnimation = '';
-    vm.creationDate = 1442332875766;
-    vm.showToastr = showToastr;
+  $scope.toggleSidenav = function(menuId) {
+    $mdSidenav(menuId).toggle();
+  };
 
-    activate();
+  $scope.showSignupDialog = function(e) {
+    $mdDialog.show({
+      controller: SignUpController,
+      templateUrl: 'app/templates/signup.html',
+      targetEvent: e
+    });
+  };
 
-    function activate() {
-      getWebDevTec();
-      $timeout(function() {
-        vm.classAnimation = 'rubberBand';
-      }, 4000);
-    }
+  $scope.showLoginDialog = function(e) {
+    $mdDialog.show({
+      controller: LoginController,
+      templateUrl: 'app/templates/login.html',
+      parent: angular.element(document.body),
+      targetEvent: e
+    });
+  };
 
-    function showToastr() {
-      toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-      vm.classAnimation = '';
-    }
+  function SignUpController($scope, $mdDialog) {
+    /*$scope.signup = {
+      email: "dlar@g.com",
+      password: ""
+    };*/
 
-    function getWebDevTec() {
-      vm.awesomeThings = webDevTec.getTec();
-
-      angular.forEach(vm.awesomeThings, function(awesomeThing) {
-        awesomeThing.rank = Math.random();
-      });
-    }
+    $scope.close = function() {
+      $mdDialog.hide();
+    };
   }
-})();
+
+  function LoginController($scope, $mdDialog) {
+    $scope.close = function() {
+      $mdDialog.hide();
+    };
+  }
+}]);

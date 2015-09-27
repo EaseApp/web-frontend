@@ -1,34 +1,225 @@
-<div layout="vertical" layout-fill>
 
-  <md-content>
-    <header>
-      <acme-navbar creationDate="main.creationDate" />
-    </header>
-
-    <section class="jumbotron">
-      <h1>'Allo, 'Allo!</h1>
-      <p class="lead">
-        <img src="assets/images/yeoman.png" alt="I'm Yeoman"><br>
-        Always a pleasure scaffolding your apps.
-      </p>
-      <md-button class="md-raised animated infinite" ng-class="main.classAnimation" ng-click="main.showToastr()">Splendid Toastr</md-button>
-      <p>
-        With ♥ thanks to the contributions of<acme-malarkey extra-values="['Yeoman', 'Gulp', 'Angular']" />
-      </p>
-    </section>
-
-    <div class="techs" layout-align="center">
-      <md-card ng-repeat="awesomeThing in main.awesomeThings | orderBy:'rank'">
-        <div class="thumbnail">
-          <img class="pull-right" ng-src="assets/images/{{ awesomeThing.logo }}" alt="{{ awesomeThing.title }}">
-          <div class="caption">
-            <h3>{{ awesomeThing.title }}</h3>
-            <p>{{ awesomeThing.description }}</p>
-            <p><a ng-href="{{ awesomeThing.url }}">{{ awesomeThing.url }}</a></p>
-          </div>
-        </div>
-      </md-card>
+<md-toolbar layout="row">
+  <div class="md-toolbar-tools">
+    <md-button id="icon-button" ng-click="toggleSidenav('left')" hide-gt-md class="md-icon-button">
+      <md-icon aria-label="Menu" md-svg-src="assets/images/menu.svg"></md-icon>
+    </md-button>
+    <a href="#top" class="toolbar-logo-stuff">
+      <img id="logo-toolbar" alt="Ease Logo" src="assets/images/EaseWhiteLogo.svg">
+    </a>
+    <a href="#top" class="toolbar-logo-stuff" hide-sm>
+      <h1 id="title-text">Ease</h1>
+    </a>
+    <div id="nav-gt-sm" hide-md hide-sm>
+      <a href="#features">FEATURES</a>
+      <a href="#why">WHY</a>
+      <a href="#pricing">PRICING</a>
+      <a href="#docs">DOCS</a>
+      <a href="#contact_us">CONTACT US</a>
     </div>
-  </md-content>
-
+    <div id="login-signup">
+      <a target="_blank" href="https://github.com/EaseApp" hide-sm>
+        <md-icon id="gitHubIconNav" aria-label="Github" md-svg-src="assets/images/githubLight.svg"></md-icon>
+      </a>
+      <md-button ng-click="showSignupDialog($event)">
+        Sign Up
+      </md-button>
+      <md-button ng-click="showLoginDialog($event)">
+        Login
+      </md-button>
+    </div>
+  </div>
+</md-toolbar>
+<div id="outer-wrapper">
+    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+      <ul id="side-menu">
+        <div id="side-nav-wrapper">
+          <a href="#top">
+            <img id="logo-side-nav" alt="NextHits Logo" src="assets/images/EaseWhiteLogo.svg">
+            <h1>Ease</h1>
+          </a>
+        </div>
+        <li class="ng-scope">
+          <menu-toggle class="ng-scope ng-isolate-scope"><a class="link-wrapper" href="#features"><button md-ink-ripple="rgb(33,150,243)" class="md-button-toggle md-button md-default-theme" aria-controls="">
+            <div flex layout="row">
+              FEATURES
+            </div>
+            </button></a>
+          </menu-toggle>
+          </li>
+          <li class="ng-scope">
+            <menu-toggle class="ng-scope ng-isolate-scope"><a class="link-wrapper" href="#why"><button md-ink-ripple="rgb(33,150,243)" class="md-button-toggle md-button md-default-theme" aria-controls="">
+              <div flex layout="row">
+                WHY
+              </div>
+              </button></a>
+            </menu-toggle>
+            </li>
+          <li class="ng-scope">
+            <menu-toggle class="ng-scope ng-isolate-scope"><a class="link-wrapper" href="#pricing"><button md-ink-ripple="rgb(33,150,243)" class="md-button-toggle md-button md-default-theme" aria-controls="">
+            <div flex layout="row">
+              PRICING
+            </div>
+            </button></a>
+            </menu-toggle>
+          </li>
+          <li class="ng-scope">
+            <menu-toggle class="ng-scope ng-isolate-scope"><a class="link-wrapper" href="#docs"><button md-ink-ripple="rgb(33,150,243)" class="md-button-toggle md-button md-default-theme" aria-controls="">
+            <div flex layout="row">
+              Docs
+            </div>
+            </button></a>
+            </menu-toggle>
+          </li>
+          <li class="ng-scope">
+            <menu-toggle class="ng-scope ng-isolate-scope"><a class="link-wrapper" href="#contact_us"><button md-ink-ripple="rgb(33,150,243)" class="md-button-toggle md-button md-default-theme" aria-controls="">
+              <div flex layout="row">
+                CONTACT US
+              </div>
+              </button></a>
+            </menu-toggle>
+          </li>
+        </ul>
+    </md-sidenav>
+    <div id="content">
+        <md-content layout="column" flex class="md-padding">
+          <div class="section" id="top">
+            <img id="logo-main-section" alt="Ease Logo" src="assets/images/EaseBlackLogo.svg">
+            <h1 id="title-main-section">Ease</h1>
+            <p id="slogan">Make your backend with Ease</p>
+            <a target="_blank" href="https://github.com/EaseApp" hide-gt-sm>
+              <md-icon id="gitHubIconBody" aria-label="Github" md-svg-src="assets/images/githubDark.svg"></md-icon>
+            </a>
+            <div id="top-grid">
+              <div class="top-grid-item">
+                <a href="#docs">
+                  <md-icon class="top-grid-icon" md-svg-src="assets/images/codeIcon.svg" alt="easily integrate"></md-icon>
+                  <h3>Easily Integrate</h3>
+                </a>
+              </div>
+              <div class="top-grid-item">
+                <a href="#why">
+                  <md-icon class="top-grid-icon" md-svg-src="assets/images/lightningIcon.svg" alt="develop rapidly"></md-icon>
+                  <h3>Develop Rapidly</h3>
+                </a>
+              </div>
+              <div class="top-grid-item">
+                <a href="#features">
+                  <md-icon class="top-grid-icon" md-svg-src="assets/images/realtimeIcon.svg" alt="build realtime apps"></md-icon>
+                  <h3>Build Realtime Apps</h3>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="section" id="features">
+            <h2 class="section-title">Features</h2>
+            <ul class="info-list">
+              <li>Use frontend code to create your datastore</li>
+              <li>Multiple libraries</li>
+              <li>Schema free data (JSON formatted)</li>
+              <li>Socket connection for realtime apps</li>
+              <li>Automatic scaling</li>
+              <li>Easily manage applications and their data</li>
+            </ul>
+            <md-button class="md-primary md-raised" ng-click="showSignupDialog($event)">Get Started</md-button>
+          </div>
+          <div class="section" id="why">
+            <h2 class="section-title">Why</h2>
+            <ul class="info-list">
+              <li>Figuring out your backend/datastorage can be very complicated</li>
+              <li>Building scalable applications with realtime capabilities is challenging</li>
+              <li>Schema free datastorage reduces the time needed to plan how your data will be stored</li>
+              <li>Devlop applications using only one language</li>
+              <li>Drastically reduces development time</li>
+              <li>Incredibily easy to use</li>
+            </ul>
+            <md-button class="md-primary md-raised" ng-click="showSignupDialog($event)">Start Building</md-button>
+          </div>
+          <div class="section" id="pricing">
+            <h2 class="section-title">Pricing</h2>
+            <p>FREE</p>
+          </div>
+          <div class="section" id="docs">
+            <h2 class="section-title">Docs</h2>
+            <div class="grid-list">
+              <div class="grid-list-item">
+                <a href="/docs">
+                  <div class="docs-img-wrapper">
+                    <img class="docs-main-img" src="assets/images/jsIcon.svg" alt="javascript">
+                    <div class="docs-secondary-img-wrapper">
+                      <img class="docs-secondary-img" src="assets/images/webIcon.svg" alt="web">
+                    </div>
+                  </div>
+                  <h3>Javascript</h3>
+                </a>
+              </div>
+              <div class="grid-list-item">
+                <a href="/docs">
+                  <div class="docs-img-wrapper">
+                    <img class="docs-main-img" src="assets/images/swiftIcon.svg" alt="swift">
+                    <div class="docs-secondary-img-wrapper">
+                      <img class="docs-secondary-img" src="assets/images/appleIcon.svg" alt="apple ios">
+                    </div>
+                  </div>
+                  <h3>Swift (iOS)</h3>
+                </a>
+              </div>
+              <div class="grid-list-item">
+                <a href="/docs">
+                  <div class="docs-img-wrapper">
+                    <img class="docs-main-img" src="assets/images/javaIcon.svg" alt="java">
+                    <div class="docs-secondary-img-wrapper">
+                      <img class="docs-secondary-img" src="assets/images/androidIcon.svg" alt="android">
+                    </div>
+                  </div>
+                  <h3>Java (Android)</h3>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="section" id="contact_us">
+            <md-card>
+              <div class="card-header">
+                <h2 class='card-title'>Contact Us</h1>
+              </div>
+              <md-card-content>
+                <p>TheEaseTeam@gmail.com</p>
+                <form action"#" method="post" name="contactForm">
+                  <md-input-container>
+                   <label>Your Email</label>
+                   <input ng-model="contact.email" name="email" type="email" ng-required="true" required>
+                   <div ng-messages="contactForm.email.$error" ng-if='submitted'>
+                     <div ng-message="required">Required</div>
+                     <div ng-message="email">Not a valid email</div>
+                   </div>
+                  </md-input-container>
+                  <md-input-container>
+                   <label>Subject</label>
+                   <input ng-model="contact.subject" name="subject" type="subject" ng-required="true" required>
+                   <div ng-messages="contactForm.subject.$error" ng-if='submitted'>
+                     <div ng-message="required">Required</div>
+                   </div>
+                  </md-input-container>
+                  <md-input-container>
+                    <label>Message</label>
+                    <textarea ng-model="contact.message" name="message" columns="1" md-maxlength="500" ng-maxlength="500" ng-required="true" required></textarea>
+                    <div ng-messages="contactForm.message.$error" ng-if='submitted'>
+                      <div ng-message="required">Required</div>
+                      <div ng-message="maxlength">Your message is too long</div>
+                    </div>
+                  </md-input-container>
+                  <md-button class="md-primary md-raised" ng-click="submitted=true">
+                    Send Email
+                  </md-button>
+                </form>
+              </md-card-content>
+            </md-card>
+            <div id="footer">
+              <p>Terms of Service</p>
+              <p>&copy Copyright 2015</p>
+              <p>Privacy Policy</p>
+            </div>
+          </div>
+        </md-content>
+    </div>
 </div>

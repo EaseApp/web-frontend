@@ -2,9 +2,14 @@
 <html ng-app="easeApp">
   <head>
     <meta charset="utf-8">
-    <title>easeApp</title>
+    <title>Ease</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="initial-scale=1" />
+    <meta property="og:url"           content="" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Ease" />
+    <meta property="og:description"   content="" />
+    <meta property="og:image"         content="http://easeapp.github.io/images/EaseLogo64x64.png" />
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
@@ -19,7 +24,7 @@
     <!-- endinject -->
     <!-- endbuild -->
   </head>
-  <body>
+  <body layout="column" class="ng-cloak" ng-view>
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->

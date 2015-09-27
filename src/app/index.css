@@ -1,55 +1,461 @@
 @import url(//fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
-
-html {
-  font-family: 'Roboto Slab', serif;
+md-toolbar {
+  position: fixed;
 }
 
-[layout=row] {
-  flex-direction: row;
+.non-fixed-toolbar {
+  position: relative;
 }
 
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+.md-toolbar-tools h1 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: inherit;
 }
 
-.thumbnail {
-  height: 200px;
+#gitHubIconNav {
+  height: 30px;
+  width: 30px;
+  transition: all .3s ease;
 }
 
-.thumbnail img.pull-right {
-  width: 50px;
+#gitHubIconNav:hover {
+  height: 35px;
+  width: 35px;
 }
 
-md-toolbar.md-default-theme {
-  background-color: black;
+#gitHubIconBody {
+  height: 40px;
+  width: 40px;
+  padding: 10px 0px 0px 0px;
 }
 
-section.jumbotron {
-  margin-bottom: 30px;
-  padding: 1px 30px;
-  background-color: #5aadbb;
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+#outer-wrapper {
+  overflow: auto !important;
+}
+
+#content {
+  color: rgb(78,78,78);
+}
+
+md-content.md-padding{
+  margin: 0px;
+  padding: 0px;
+  color: rgb(78,78,78);
+}
+
+.section {
+  box-sizing: border-box;
+  min-height: 100%;
+  width:100%;
+  padding:64px 20px 20px 20px;
+}
+
+md-sidenav {
+  width: 250px;
+  min-width: 250px;
+}
+
+#side-nav-wrapper {
   text-align: center;
-
-  color: white;
+  padding: 10px;
+  background: #95a5a6;
+  text-decoration: none;
+  color: rgb(255,255,255);
 }
 
-section.jumbotron h1 {
-  font-size: 3em;
+#side-menu a {
+  text-decoration: none;
+  color: rgb(78,78,78);
 }
 
-.techs {
-  display: flex;
-  flex-flow: row wrap;
+md-sidenav #side-nav-wrapper a {
+  text-decoration: none;
+  color: rgb(255,255,255);
 }
 
-.techs md-card {
-  width: 30%;
+#side-nav-wrapper h1 {
+  margin: 0px;
 }
 
-.techs md-card img.pull-right {
-  float: right;
-  width: 50px;
+#logo-side-nav {
+  width: 100px;
+  height: 100px;
+}
+
+#side-menu {
+  padding-left: 0px;
+  margin-top: 0px;
+}
+
+#side-menu .md-button {
+  width: 100%;
+  padding: 10px 20px;
+  margin: 0px;
+}
+
+div.fb-like {
+  display: inline-block;
+  height: 20px;
+  width: 122px;
+  margin-left: 25px;
+}
+
+#social-share {
+  height: 20px;
+  margin: 5px 0px 0px 0px;
+}
+
+#icon-button:focus {
+  background: rgba(255,255,255,.1);
+}
+
+#title-text {
+  font-weight: 500;
+  font-size: 24px;
+  margin: 0px 8px;
+}
+
+.toolbar-logo-stuff {
+  z-index: 10;
+}
+
+#signup-dialog h3, #login-dialog h3 {
+  margin: 0px;
+  color: #95a5a6;
+}
+
+#login-signup .md-button {
+  border: 1px solid rgba(255,255,255,.5);
+}
+
+#login-signup .md-button:hover, #login-signup .md-button:focus {
+  color: rgb(33,150,243) !important;
+  background-color: white !important;
+}
+
+.social-login {
+  width:100px;
+  height: 100px;
+  border-radius: 10px;
+  margin: 0px 0px 10px 0px;
+}
+
+#google-icon {
+  margin: 0px 25px 10px 0px;
+}
+
+#logo-toolbar {
+  width: 40px;
+  height: 40px;
+}
+
+#logo-main-section {
+  width: 150px;
+  height: 150px;
+  margin-top: 10px;
+}
+
+md-toolbar {
+  text-align: center;
+}
+
+#login-signup {
+  position: absolute;
+  top: 13px;
+  right: 5px;
+}
+
+#nav-gt-sm {
+  position: absolute;
+  top: 20px;
+  left: 0px;
+  right: 0px;
+}
+
+#nav-gt-sm a {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 13px;
+  margin: 0px 20px;
+}
+
+#nav-gt-sm a:hover {
+  border-bottom: 2px solid rgba(255,255,255,.5);
+}
+
+#top, #contact_us {
+  text-align: center;
+}
+
+#top {
+  padding-top: 64px;
+  background-color: rgb(236, 240, 241);
+  background: rgb(236, 240, 241) url('../assets/images/EaseBackground.svg');
+  -webkit-background-size: 100% auto;
+  -moz-background-size: 100% auto;
+  -o-background-size: 100% auto;
+  background-size: 100% auto;
+  background-position: bottom left;
+  background-repeat: no-repeat;
+}
+
+#features {
+  background: rgb(33,150,243);
+  color: rgb(255,255,255);
+}
+
+#features .md-button {
+  background: rgb(255,255,255);
+  color: rgb(78,78,78);
+}
+
+#why {
+  background: rgb(236, 240, 241);
+}
+
+#features, #why {
+  text-align: center;
+}
+
+#features .md-button, #why .md-button {
+  display: block;
+  margin: 0px auto;
+}
+
+.info-list {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 100;
+  margin: 10px auto 25px auto;
+  text-align: left;
+}
+
+.info-list li {
+  margin: 25px 0px;
+}
+
+#pricing {
+  background: rgb(33,150,243);
+  color: rgb(255,255,255);
+  text-align: center;
+}
+
+#pricing p {
+  font-size: 75px;
+  font-weight: 100;
+}
+
+#docs {
+  background: rgb(236, 240, 241);
+}
+
+.grid-list {
+  text-align: center;
+  margin: 50px 0px 0px 0px;
+}
+
+.grid-list-item {
+  display: inline-block;
+  width: 220px;
+  margin: 0px 40px 40px 40px;
+}
+
+.grid-list-item a {
+  display: block;
+  width: 220px;
+  text-decoration: none;
+  color: rgb(78,78,78);
+}
+
+.grid-list-item h3 {
+  font-weight: 100;
+  margin: 15px 0px 0px 0px;
+}
+
+.docs-img-wrapper {
+  position: relative;
+  width: 220px;
+  height: 220px;
+}
+
+.docs-main-img {
+  height: 200px;
+  width: 200px;
+  background-color: rgb(255,255,255);
+  padding: 10px;
+  border-radius: 50%;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.14), 0px 2px 2px 0px rgba(0, 0, 0, 0.098), 0px 1px 5px 0px rgba(0, 0, 0, 0.084);
+}
+
+.docs-secondary-img-wrapper {
+  display: block;
+  position: absolute;
+  width: 100%;
+  bottom: 20px;
+  text-align: center;
+}
+
+.docs-secondary-img {
+  height: 30px;
+  width: 30px;
+  transition: all .5s ease;
+}
+
+.grid-list-item:hover .docs-secondary-img{
+  -ms-transform: rotateZ(360deg); /* IE 9 */
+  -webkit-transform: rotateZ(360deg); /* Chrome, Safari, Opera */
+  transform: rotateZ(360deg);
+}
+
+#contact_us {
+  background: rgb(33,150,243);
+  color: rgb(255,255,255);
+  padding-top: 75px;
+  padding-bottom: 100px;
+}
+
+#contact_us md-card {
+  width:800px;
+  max-width: 90%;
+  margin: 0px auto;
+  background: rgb(255,255,255);
+}
+
+.card-header {
+  box-shadow: rgba(0, 0, 0, 0.137255) 0px 3px 1px -2px, rgba(0, 0, 0, 0.0980392) 0px 2px 2px 0px, rgba(0, 0, 0, 0.0823529) 0px 1px 5px 0px;
+}
+
+#contact_us md-card p {
+  margin: 10px 0px 0px 0px;
+  color: rgb(150,150,150);
+}
+
+#contact_us form {
+  padding: 10px 10px;
+}
+
+.section-title {
+  margin: 10px 0px;
+  font-weight: 100;
+  text-align: center;
+}
+
+#title-main-section {
+  font-size: 40px;
+  margin:0px;
+}
+
+#slogan {
+  font-weight: 500;
+  font-size: 20px;
+  margin:0px;
+}
+
+.md-button.close {
+  margin-left: 0px;
+}
+
+md-dialog {
+  max-width: 90%;
+}
+
+md-dialog md-toolbar.md-default-theme {
+  background: #95a5a6;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.137255) 0px 3px 1px -2px, rgba(0, 0, 0, 0.0980392) 0px 2px 2px 0px, rgba(0, 0, 0, 0.0823529) 0px 1px 5px 0px;
+}
+
+md-dialog h2 {
+  width: 100%;
+  padding-left: 39px;
+  text-align: center;
+}
+
+label {
+  text-align: left;
+}
+
+
+
+md-dialog#signup-dialog, md-dialog#login-dialog {
+  width: 400px;
+  text-align: center;
+}
+
+.card-header {
+    background: #95a5a6;
+    padding: 10px;
+}
+
+.card-title {
+  text-align: center;
+  margin: 0px;
+  color: rgb(255,255,255);
+  font-size: 20px;
+}
+
+md-input-container {
+  padding: 2px 20px 26px;
+}
+
+#top-grid {
+  margin: 25px 0px 0px 0px;
+}
+
+#top-grid a {
+  display: block;
+  width: 200px;
+  height: 175px;
+  padding: 25px;
+  color: rgb(255,255,255);
+  text-decoration: none;
+}
+
+
+.top-grid-item {
+  display: inline-block;
+  width: 250px;
+  height: 225px;
+  margin: 0px 25px 25px 25px;
+  border-radius: 5px;
+  background: rgba(33,150,243,.8);
+  color: rgb(255,255,255);
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+md-icon.top-grid-icon {
+  color: #95a5a6;
+}
+
+.top-grid-item h3 {
+  margin-bottom: 0px;
+  margin-top: 30px;
+}
+
+.top-grid-icon {
+  height: 75px;
+  width: 75px;
+  background-color: rgb(255,255,255);
+  padding: 25px;
+  border-radius: 50%;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.14), 0px 2px 2px 0px rgba(0, 0, 0, 0.098), 0px 1px 5px 0px rgba(0, 0, 0, 0.084);
+}
+
+#footer {
+  text-align: center;
+  position: absolute;
+  right: 0px;
+  left: 0px;
+  bottom: 20px;
+}
+
+#footer p {
+  display: inline-block;
+  margin: 5px 10px;
+  font-size: 14px;
 }
