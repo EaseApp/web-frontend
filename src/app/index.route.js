@@ -22,6 +22,9 @@
         templateUrl: 'dashboard/dashboard.html',
         controller: 'DashboardController'
 
+      }).state('login', {
+        url: '/login',
+        controller: 'LoginController'
       });
 
     $urlRouterProvider.otherwise('/');
