@@ -15,11 +15,11 @@
         controllerAs: 'main'
       }).state('docs', {
         url: '/docs',
-        templateUrl: 'docs/docs.html',
+        templateUrl: 'app/docs/docs.html',
         controller: 'DocsController'
       }).state('dashboard', {
         url: '/dashboard',
-        templateUrl: 'dashboard/dashboard.html',
+        templateUrl: 'app/dashboard/dashboard.html',
         controller: 'DashboardController'
 
       }).state('login', {
