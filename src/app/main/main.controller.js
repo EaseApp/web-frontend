@@ -1,7 +1,7 @@
 angular.module('easeApp').controller('MainController', ['$scope', '$mdSidenav', '$mdDialog', function($scope, $mdSidenav, $mdDialog){
 
   $(document).ready(function() {
-    $('a[href*=#]:not([href=#])').click(function() {
+    $('a[href*=#]:not([href=#])').click(function(e) {
       if($mdSidenav('left').isOpen()) {
         $mdSidenav('left').toggle();
       }
@@ -35,7 +35,7 @@ angular.module('easeApp').controller('MainController', ['$scope', '$mdSidenav', 
   $scope.showLoginDialog = function(e) {
     $mdDialog.show({
       controller: LoginController,
-      templateUrl: 'app/templates/login.html',
+      templateUrl: 'app/login/login.html',
       parent: angular.element(document.body),
       targetEvent: e
     });
