@@ -1,15 +1,16 @@
 <!doctype html>
 <html ng-app="easeApp">
   <head>
+    <base href="/">
     <meta charset="utf-8">
     <title>Ease</title>
     <meta name="description" content="">
-    <meta name="viewport" content="initial-scale=1" />
     <meta property="og:url"           content="" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Ease" />
     <meta property="og:description"   content="" />
-    <meta property="og:image"         content="http://easeapp.github.io/images/EaseLogo64x64.png" />
+    <meta property="og:image"         content="assets/images/EaseLogo64x64.png" />
+    <link rel="shortcut icon" href="favicon.ico"/>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
@@ -23,6 +24,7 @@
     <!-- css files will be automatically insert here -->
     <!-- endinject -->
     <!-- endbuild -->
+    <meta name="viewport" content="initial-scale=1" />
   </head>
   <body layout="column" class="ng-cloak" ng-view>
     <!--[if lt IE 10]>
