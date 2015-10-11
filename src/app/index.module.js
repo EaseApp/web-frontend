@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('easeApp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ngMaterial', 'ngMessages']);
+    .module('easeApp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ngMaterial', 'ngMessages', 'ui.tree']);
 
 })();
