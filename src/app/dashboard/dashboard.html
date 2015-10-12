@@ -24,8 +24,10 @@
             <p id="profile-popup-email">{{user.email}}</p>
             <md-menu-item>
               <md-button ng-click="">
-                <md-icon md-svg-icon="assets/images/apps-icon.svg"></md-icon>
-                My Apps
+                <a href="/dashboard">
+                  <md-icon md-svg-icon="assets/images/apps-icon.svg"></md-icon>
+                  My Apps
+                </a>
               </md-button>
             </md-menu-item>
             <md-menu-item>
@@ -47,20 +49,23 @@
   </div>
 </md-toolbar>
 <div layout="row" flex>
-    <div layout="column" flex id="content">
-        <md-content layout="column" flex class="md-padding have-padding">
+    <div layout="column" flex id="content" class="ui-view-container">
+        <md-content layout="column" flex class="md-padding have-padding ng-cloak" ui-view>
           <md-grid-list
                 md-cols-sm="1" md-cols-md="3" md-cols-gt-md="4"
                 md-row-height-gt-md="1:1" md-row-height="2:2"
                 md-gutter="10px" md-gutter-gt-sm="25px" >
             <md-grid-tile ng-repeat="item in [1, 2, 3, 4, 5, 6]">
-              <h1>{{item}}</h1>
-              <md-grid-tile-footer>
-                <h3>item: {{item}}</h3>
-              </md-grid-tile-footer>
+              <a class="app-link-wrapper" md-ink-ripple="rgba(0,0,0,.1)" ui-sref="dashboard.userApp({app: item})">
+                <h1>{{item}}</h1>
+                <md-grid-tile-footer>
+                  <h3>{{item}}</h3>
+                  <h3>Enpoint: {{item}}</h3>
+                </md-grid-tile-footer>
+              </a>
             </md-grid-tile>
           </md-grid-list>
+          <img ng-click="showAddApp()" id="new-app-icon" src="assets/images/new-app-icon.png" alt="New App">
         </md-content>
-        <img ng-click="showAddApp()" id="new-app-icon" src="assets/images/new-app-icon.png" alt="New App">
     </div>
 </div>

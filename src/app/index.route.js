@@ -21,7 +21,10 @@
         url: '/dashboard',
         templateUrl: 'app/dashboard/dashboard.html',
         controller: 'DashboardController'
-
+      }).state('dashboard.userApp', {
+        url: '/:app',
+        templateUrl: 'app/userApp/userApp.html',
+        controller: 'UserAppController'
       }).state('login', {
         url: '/login',
         controller: 'LoginController'
