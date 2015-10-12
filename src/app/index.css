@@ -1,6 +1,12 @@
 @import url(//fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
 md-toolbar {
   position: fixed;
+  height: 64px;
+}
+
+.md-toolbar-tools {
+  height: 64px;
+  max-height: 64px;
 }
 
 .non-fixed-toolbar {
@@ -175,6 +181,12 @@ md-toolbar {
 }
 
 .nav-right-actions {
+  position: absolute;
+  top: 13px;
+  right: 5px;
+}
+
+#nav-right-actions-dash {
   position: absolute;
   top: 8px;
   right: 5px;
