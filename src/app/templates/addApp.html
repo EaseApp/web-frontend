@@ -1,0 +1,25 @@
+<md-dialog id="add-app-dialog" aria-label="addApp Dialog">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Create New App</h2>
+      <span flex></span>
+      <md-button class="md-icon-button close" ng-click="close()">
+        <md-icon md-svg-src="assets/images/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+   <form action"#" method="post" name="addAppForm">
+     <md-input-container>
+      <label>New App Name</label>
+      <input ng-model="addApp.appName" name="appName" ng-required="true" required>
+      <div ng-messages="addAppForm.appName.$error" ng-if='submitted'>
+        <div ng-message="required">Required</div>
+      </div>
+     </md-input-container>
+     <md-button class="md-primary md-raised" ng-click="submitted=true">
+       Create
+     </md-button>
+   </form>
+  </md-dialog-content>
+</md-dialog>

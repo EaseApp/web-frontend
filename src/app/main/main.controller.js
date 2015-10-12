@@ -28,6 +28,7 @@ angular.module('easeApp').controller('MainController', ['$scope', '$mdSidenav', 
     $mdDialog.show({
       controller: SignUpController,
       templateUrl: 'app/templates/signup.html',
+      clickOutsideToClose: true,
       targetEvent: e
     });
   };
@@ -36,6 +37,7 @@ angular.module('easeApp').controller('MainController', ['$scope', '$mdSidenav', 
     $mdDialog.show({
       controller: LoginController,
       templateUrl: 'app/templates/login.html',
+      clickOutsideToClose: true,
       parent: angular.element(document.body),
       targetEvent: e
     });
