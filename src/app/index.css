@@ -34,8 +34,13 @@ md-toolbar {
   display: none !important;
 }
 
+#ui-view {
+  height: 100%;
+}
+
 #outer-wrapper {
   overflow: auto !important;
+  height: 100%;
 }
 
 #content {
@@ -129,13 +134,18 @@ div.fb-like {
   color: #95a5a6;
 }
 
-#login-signup .md-button {
+.nav-right-actions .md-button {
   border: 1px solid rgba(255,255,255,.5);
 }
 
-#login-signup .md-button:hover, #login-signup .md-button:focus {
+.nav-right-actions .md-button:hover, .nav-right-actions .md-button:focus {
   color: rgb(33,150,243) !important;
   background-color: white !important;
+}
+
+.nav-right-actions .md-button.no-outline {
+  border: none;
+  background: transparent !important;
 }
 
 .social-login {
@@ -164,9 +174,9 @@ md-toolbar {
   text-align: center;
 }
 
-#login-signup {
+.nav-right-actions {
   position: absolute;
-  top: 13px;
+  top: 8px;
   right: 5px;
 }
 
@@ -382,7 +392,7 @@ label {
 
 
 
-md-dialog#signup-dialog, md-dialog#login-dialog {
+md-dialog#signup-dialog, md-dialog#login-dialog, md-dialog#add-app-dialog{
   width: 400px;
   text-align: center;
 }
@@ -458,4 +468,53 @@ md-icon.top-grid-icon {
   display: inline-block;
   margin: 5px 10px;
   font-size: 14px;
+}
+
+#nav-right-docs-link-wrapper {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.icon-under-label {
+  margin: 0px;
+  font-size: 14px;
+}
+
+#profile-pic {
+  height: 100%;
+  width: 100%;
+  vertical-align: bottom;
+}
+
+#new-app-icon {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  box-sizing: border-box;
+  width: 50px;
+  padding: 10px;
+  background: rgb(33,150,243);
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+  outline: none;
+  transition: all .5s ease;
+}
+
+#new-app-icon:hover {
+  cursor: pointer;
+  width: 60px;
+}
+
+.md-open-menu-container {
+  max-width: 300px;
+}
+
+#profile-popup-email {
+  margin: 0px;
+  text-align: center;
+  font-size: 14px;
+  padding: 0px 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: rgb(120,120,120);
 }
