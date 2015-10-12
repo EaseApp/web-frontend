@@ -286,6 +286,13 @@ md-toolbar {
   background: rgb(236, 240, 241);
 }
 
+#docs .section-sub-header {
+  text-align: center;
+  font-weight: 100;
+  color: rgb(180,180,180);
+  margin: 25px 0px 0px 0px;
+}
+
 .grid-list {
   text-align: center;
   margin: 50px 0px 0px 0px;
