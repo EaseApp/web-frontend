@@ -7,6 +7,9 @@
       <h1 id="title-text">Dashboard</h1>
     </a>
     <div id="nav-right-actions-dash">
+      <a target="_blank" href="https://github.com/EaseApp">
+        <md-icon id="gitHubIconDashDocs" aria-label="Github" md-svg-src="assets/images/githubLight.svg"></md-icon>
+      </a>
       <a target="_blank" href="/docs" id='nav-right-docs-link-wrapper'>
         <div layout="column">
           <md-icon aria-label="Docs" md-svg-src="assets/images/docs-icon.svg"></md-icon>
@@ -21,18 +24,21 @@
             <p id="profile-popup-email">{{user.email}}</p>
             <md-menu-item>
               <md-button ng-click="">
-                <p>My Apps</p>
+                <md-icon md-svg-icon="assets/images/apps-icon.svg"></md-icon>
+                My Apps
               </md-button>
             </md-menu-item>
             <md-menu-item>
               <md-button ng-click="">
-                <p>My Account</p>
+                <md-icon md-svg-icon="assets/images/user-icon.svg"></md-icon>
+                My Account
               </md-button>
             </md-menu-item>
             <md-menu-divider></md-menu-divider>
             <md-menu-item>
-              <md-button ng-click="signOut($event)">
-                <p>Sign Out</p>
+              <md-button ng-click="logout($event)">
+                <md-icon md-svg-icon="assets/images/logout-icon.svg"></md-icon>
+                Logout
               </md-button>
             </md-menu-item>
           </md-menu-content>
@@ -42,7 +48,42 @@
 </md-toolbar>
 <div layout="row" flex>
     <div layout="column" flex id="content">
-        <md-content layout="column" flex class="md-padding">
+        <md-content layout="column" flex class="md-padding have-padding">
+          <md-grid-list
+                md-cols-sm="1" md-cols-md="3" md-cols-gt-md="4"
+                md-row-height-gt-md="1:1" md-row-height="2:2"
+                md-gutter="10px" md-gutter-gt-sm="25px" >
+            <md-grid-tile class="gray">
+              <md-grid-tile-footer>
+                <h3>#1: (3r x 2c)</h3>
+              </md-grid-tile-footer>
+            </md-grid-tile>
+            <md-grid-tile class="green">
+              <md-grid-tile-footer>
+                <h3>#2: (1r x 1c)</h3>
+              </md-grid-tile-footer>
+            </md-grid-tile>
+            <md-grid-tile class="yellow">
+              <md-grid-tile-footer>
+                <h3>#3: (1r x 1c)</h3>
+              </md-grid-tile-footer>
+            </md-grid-tile>
+            <md-grid-tile>
+              <md-grid-tile-footer>
+                <h3>#4: (2r x 1c)</h3>
+              </md-grid-tile-footer>
+            </md-grid-tile>
+            <md-grid-tile>
+              <md-grid-tile-footer>
+                <h3>#5: (2r x 2c)</h3>
+              </md-grid-tile-footer>
+            </md-grid-tile>
+            <md-grid-tile>
+              <md-grid-tile-footer>
+                <h3>#6: (2r x 1c)</h3>
+              </md-grid-tile-footer>
+            </md-grid-tile>
+          </md-grid-list>
         </md-content>
         <img ng-click="showAddApp()" id="new-app-icon" src="assets/images/new-app-icon.png" alt="New App">
     </div>

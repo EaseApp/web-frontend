@@ -36,6 +36,12 @@ md-toolbar {
   padding: 10px 0px 0px 0px;
 }
 
+#gitHubIconDashDocs {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+}
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
@@ -57,6 +63,10 @@ md-content.md-padding{
   margin: 0px;
   padding: 0px;
   color: rgb(78,78,78);
+}
+
+md-content.md-padding.have-padding {
+  padding: 25px;
 }
 
 .section {
@@ -484,7 +494,7 @@ md-icon.top-grid-icon {
 
 #nav-right-docs-link-wrapper {
   display: inline-block;
-  margin-right: 10px;
+  margin: 0px 10px;
 }
 
 .icon-under-label {
@@ -509,12 +519,12 @@ md-icon.top-grid-icon {
   border-radius: 50%;
   box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
   outline: none;
-  transition: all .5s ease;
+  transition: all .3s ease;
 }
 
 #new-app-icon:hover {
   cursor: pointer;
-  width: 60px;
+  width: 57px;
 }
 
 .md-open-menu-container {
@@ -529,4 +539,12 @@ md-icon.top-grid-icon {
   text-overflow: ellipsis;
   overflow: hidden;
   color: rgb(120,120,120);
+}
+
+md-menu-item md-icon {
+  color: rgb(0,0,0);
+}
+
+md-grid-tile {
+  background: rgb(120,120,120);
 }
