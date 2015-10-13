@@ -1,1 +1,48 @@
-<h1>App {{app.name}}</h1>
+<div id="selected-app-header">
+  <h1>App {{app.name}}</h1>
+  <h2>Endpoint: {{app.name}}</h2>
+  <md-menu id="settings-menu" md-position-mode="target-right target">
+    <md-button aria-label="Open menu" class="md-icon-button no-outline" ng-click="$mdOpenMenu($event)">
+      <md-icon aria-label="Settings" md-svg-src="assets/images/settings-icon.svg"></md-icon>
+    </md-button>
+    <md-menu-content width="4">
+      <md-menu-item>
+        <md-button ng-click="showConfirmClear($event)">
+          <md-icon md-svg-icon="assets/images/clear-icon.svg"></md-icon>
+          Clear App Data
+        </md-button>
+      </md-menu-item>
+      <md-menu-item>
+        <md-button ng-click="showConfirmDelete($event)">
+          <md-icon md-svg-icon="assets/images/delete-icon.svg"></md-icon>
+          Delete App
+        </md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
+<div>
+<md-progress-circular md-mode="indeterminate" md-diameter="90"></md-progress-circular>
+<script type="text/ng-template" id="nodes_renderer.html">
+  <div ui-tree-handle class="tree-node tree-node-content">
+    <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)"><span
+        class="glyphicon"
+        ng-class="{
+          'glyphicon-chevron-right': collapsed,
+          'glyphicon-chevron-down': !collapsed
+        }"></span></a>
+    {{node.title}}
+    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span
+        class="glyphicon glyphicon-remove"></span></a>
+    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span
+        class="glyphicon glyphicon-plus"></span></a>
+  </div>
+  <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+    </li>
+  </ol>
+</script>
+<div ui-tree id="tree-root" data-nodrop-enabled="true" data-clone-enabled="false" data-drag-enabled="false">
+  <ol ui-tree-nodes ng-model="data">
+    <li ng-repeat="node in data" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+  </ol>
+</div>

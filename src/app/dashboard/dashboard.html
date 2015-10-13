@@ -23,15 +23,13 @@
           <md-menu-content width="4" >
             <p id="profile-popup-email">{{user.email}}</p>
             <md-menu-item>
-              <md-button ng-click="">
-                <a href="/dashboard">
-                  <md-icon md-svg-icon="assets/images/apps-icon.svg"></md-icon>
-                  My Apps
-                </a>
+              <md-button href="/dashboard" ng-click="$mdCloseMenu($event)">
+                <md-icon md-svg-icon="assets/images/apps-icon.svg"></md-icon>
+                My Apps
               </md-button>
             </md-menu-item>
             <md-menu-item>
-              <md-button ng-click="">
+              <md-button>
                 <md-icon md-svg-icon="assets/images/user-icon.svg"></md-icon>
                 My Account
               </md-button>
