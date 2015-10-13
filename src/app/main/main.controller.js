@@ -10,7 +10,7 @@ angular.module('easeApp').controller('MainController', ['$scope', '$mdSidenav', 
         target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
         if (target.length) {
           var position = target.position().top + $("md-content").scrollTop();
-          $('#outer-wrapper,html,body').animate({
+          $('#outer-wrapper').animate({
             scrollTop: position
           }, 1000);
 
