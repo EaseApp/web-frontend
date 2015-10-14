@@ -1,6 +1,55 @@
 @import url(//fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
+
+.ui-view-container {
+  position: relative;
+}
+
+.ui-view-container [ui-view].ng-enter, .ui-view-container [ui-view].ng-leave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  -webkit-transition:all .5s ease-in-out;
+    -moz-transition:all .5s ease-in-out;
+    -o-transition:all .5s ease-in-out;
+    transition:all .5s ease-in-out;
+}
+
+.ui-view-container [ui-view].ng-enter {
+  opacity: 0;
+  -webkit-transform:scale3d(0.5, 0.5, 0.5);
+  -moz-transform:scale3d(0.5, 0.5, 0.5);
+  transform:scale3d(0.5, 0.5, 0.5);
+}
+
+.ui-view-container [ui-view].ng-enter-active {
+  opacity: 1;
+  -webkit-transform:scale3d(1, 1, 1);
+  -moz-transform:scale3d(1, 1, 1);
+  transform:scale3d(1, 1, 1);
+}
+
+.ui-view-container [ui-view].ng-leave {
+  opacity: 1;
+  -webkit-transform:translate3d(0, 0, 0);
+  -moz-transform:translate3d(0, 0, 0);
+  transform:translate3d(0, 0, 0);
+}
+
+.ui-view-container [ui-view].ng-leave-active {
+  opacity: 0;
+  -webkit-transform:translate3d(100px, 0, 0);
+  -moz-transform:translate3d(100px, 0, 0);
+  transform:translate3d(100px, 0, 0);
+}
+
 md-toolbar {
   position: fixed;
+  height: 64px;
+}
+
+.md-toolbar-tools {
+  height: 64px;
+  max-height: 64px;
 }
 
 .non-fixed-toolbar {
@@ -30,12 +79,23 @@ md-toolbar {
   padding: 10px 0px 0px 0px;
 }
 
+#gitHubIconDashDocs {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+}
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
 
+#ui-view {
+  height: 100%;
+}
+
 #outer-wrapper {
   overflow: auto !important;
+  height: 100%;
 }
 
 #content {
@@ -48,9 +108,13 @@ md-content.md-padding{
   color: rgb(78,78,78);
 }
 
+md-content.md-padding.have-padding {
+  padding: 25px;
+}
+
 .section {
   box-sizing: border-box;
-  min-height: 100%;
+  min-height: 100vh;
   width:100%;
   padding:64px 20px 20px 20px;
 }
@@ -129,13 +193,18 @@ div.fb-like {
   color: #95a5a6;
 }
 
-#login-signup .md-button {
+.nav-right-actions .md-button {
   border: 1px solid rgba(255,255,255,.5);
 }
 
-#login-signup .md-button:hover, #login-signup .md-button:focus {
+.nav-right-actions .md-button:hover, .nav-right-actions .md-button:focus {
   color: rgb(33,150,243) !important;
   background-color: white !important;
+}
+
+.nav-right-actions .md-button.no-outline {
+  border: none;
+  background: transparent !important;
 }
 
 .social-login {
@@ -164,9 +233,15 @@ md-toolbar {
   text-align: center;
 }
 
-#login-signup {
+.nav-right-actions {
   position: absolute;
   top: 13px;
+  right: 5px;
+}
+
+#nav-right-actions-dash {
+  position: absolute;
+  top: 8px;
   right: 5px;
 }
 
@@ -252,6 +327,13 @@ md-toolbar {
 
 #docs {
   background: rgb(236, 240, 241);
+}
+
+#docs .section-sub-header {
+  text-align: center;
+  font-weight: 100;
+  color: rgb(180,180,180);
+  margin: 25px 0px 0px 0px;
 }
 
 .grid-list {
@@ -370,7 +452,7 @@ md-dialog md-toolbar.md-default-theme {
   box-shadow: rgba(0, 0, 0, 0.137255) 0px 3px 1px -2px, rgba(0, 0, 0, 0.0980392) 0px 2px 2px 0px, rgba(0, 0, 0, 0.0823529) 0px 1px 5px 0px;
 }
 
-md-dialog h2 {
+#signup-dialog h2, #login-dialog h2 {
   width: 100%;
   padding-left: 39px;
   text-align: center;
@@ -382,7 +464,7 @@ label {
 
 
 
-md-dialog#signup-dialog, md-dialog#login-dialog {
+md-dialog#signup-dialog, md-dialog#login-dialog, md-dialog#add-app-dialog{
   width: 400px;
   text-align: center;
 }
@@ -401,6 +483,7 @@ md-dialog#signup-dialog, md-dialog#login-dialog {
 
 md-input-container {
   padding: 2px 20px 26px;
+  text-align: left;
 }
 
 #top-grid {
@@ -459,3 +542,259 @@ md-icon.top-grid-icon {
   margin: 5px 10px;
   font-size: 14px;
 }
+
+#nav-right-docs-link-wrapper {
+  display: inline-block;
+  margin: 0px 10px;
+}
+
+.icon-under-label {
+  margin: 0px;
+  font-size: 14px;
+}
+
+#profile-pic {
+  height: 100%;
+  width: 100%;
+  vertical-align: bottom;
+}
+
+#new-app-icon {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  box-sizing: border-box;
+  width: 50px;
+  padding: 10px;
+  background: rgb(33,150,243);
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+  outline: none;
+  transition: all .3s ease;
+}
+
+.ui-view-container [ui-view].ng-animate #new-app-icon {
+  height: 0px;
+  width: 0px;
+  opacity: 0;
+}
+
+#new-app-icon:hover {
+  cursor: pointer;
+  width: 57px;
+}
+
+.md-open-menu-container {
+  max-width: 300px;
+}
+
+#profile-popup-email {
+  margin: 0px;
+  text-align: center;
+  font-size: 14px;
+  padding: 0px 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: rgb(120,120,120);
+}
+
+md-menu-item md-icon {
+  color: rgb(0,0,0);
+}
+
+md-grid-tile {
+  background: rgb(120,120,120);
+  transition: all 400ms ease-out 50ms;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.14), 0px 2px 2px 0px rgba(0, 0, 0, 0.098), 0px 1px 5px 0px rgba(0, 0, 0, 0.084);
+}
+
+.app-link-wrapper {
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color:white;
+  text-align: center;
+}
+
+md-grid-tile-footer {
+  text-align: left;
+}
+
+#selected-app-header {
+  position: relative;
+}
+
+#selected-app-header h1, #selected-app-header h2 {
+  margin: 0px;
+  padding-right: 42px;
+  word-wrap: break-word;
+}
+
+#selected-app-header h2 {
+  font-size: 16px;
+  font-weight: 100;
+}
+
+#selected-app-header #settings-menu {
+  position: absolute;
+  top: -6px;
+  right: -9px;
+  padding: 0px;
+}
+
+#selected-app-header #settings-menu md-icon {
+  height: 30px;
+  width:30px;
+}
+
+
+md-progress-circular {
+  margin: 0 auto;
+}
+
+/*Tree Stuff*/
+.btn {
+    margin-right: 8px;
+}
+
+.angular-ui-tree-handle {
+    background: #f8faff;
+    border: 1px solid #dae2ea;
+    color: #7c9eb2;
+    padding: 10px 10px;
+}
+
+.angular-ui-tree-handle:hover {
+    color: #438eb9;
+    background: #f4f6f7;
+    border-color: #dce2e8;
+}
+
+.angular-ui-tree-placeholder {
+    background: #f0f9ff;
+    border: 2px dashed #bed2db;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.group-title {
+    background-color: #687074 !important;
+    color: #FFF !important;
+}
+
+
+/* --- Tree --- */
+.tree-node {
+    border: 1px solid #dae2ea;
+    background: #f8faff;
+    color: #7c9eb2;
+}
+
+.nodrop {
+    background-color: #f2dede;
+}
+
+.tree-node-content {
+    margin: 10px;
+}
+.tree-handle {
+    padding: 10px;
+    background: #428bca;
+    color: #FFF;
+    margin-right: 10px;
+}
+
+.angular-ui-tree-handle:hover {
+}
+
+.angular-ui-tree-placeholder {
+    background: #f0f9ff;
+    border: 2px dashed #bed2db;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#tree-root, #tree-root *{
+  box-sizing: border-box;
+}
+
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.btn-success {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.btn-xs, .btn-group-xs>.btn {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+.pull-right {
+  float: right!important;
+}
+
+.glyphicon-chevron-right:before {
+    content: "\e080";
+}
+
+.glyphicon-chevron-down:before {
+    content: "\e114";
+}
+
+.glyphicon-plus:before {
+    content: "\2b";
+}
+
+.glyphicon-remove:before {
+    content: "\e014";
+}
+
+/*End Tree Stuff*/

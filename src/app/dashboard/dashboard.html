@@ -1,23 +1,69 @@
 <md-toolbar layout="row" class="non-fixed-toolbar">
   <div class="md-toolbar-tools">
-    <md-button ng-click="toggleSidenav('left')" hide-gt-sm class="md-icon-button">
-      <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
-    </md-button>
     <a href="/" class="toolbar-logo-stuff">
       <img id="logo-toolbar" alt="Ease Logo" src="assets/images/EaseWhiteLogo.svg">
     </a>
-    <a href="/" class="toolbar-logo-stuff">
+    <a href="/dashboard" class="toolbar-logo-stuff" hide-sm>
       <h1 id="title-text">Dashboard</h1>
     </a>
+    <div id="nav-right-actions-dash">
+      <a target="_blank" href="https://github.com/EaseApp">
+        <md-icon id="gitHubIconDashDocs" aria-label="Github" md-svg-src="assets/images/githubLight.svg"></md-icon>
+      </a>
+      <a target="_blank" href="/docs" id='nav-right-docs-link-wrapper'>
+        <div layout="column">
+          <md-icon aria-label="Docs" md-svg-src="assets/images/docs-icon.svg"></md-icon>
+          <p class="icon-under-label">Docs</p>
+        </div>
+      </a>
+      <md-menu md-offset="0 64" md-position-mode="target-right target">
+          <md-button aria-label="Open menu" class="md-icon-button no-outline" ng-click="$mdOpenMenu($event)">
+            <img id="profile-pic" ng-src="http://www.gravatar.com/avatar/{{user.emailHash}}"></img>
+          </md-button>
+          <md-menu-content width="4" >
+            <p id="profile-popup-email">{{user.email}}</p>
+            <md-menu-item>
+              <md-button href="/dashboard" ng-click="$mdCloseMenu($event)">
+                <md-icon md-svg-icon="assets/images/apps-icon.svg"></md-icon>
+                My Apps
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button>
+                <md-icon md-svg-icon="assets/images/user-icon.svg"></md-icon>
+                My Account
+              </md-button>
+            </md-menu-item>
+            <md-menu-divider></md-menu-divider>
+            <md-menu-item>
+              <md-button ng-click="logout($event)">
+                <md-icon md-svg-icon="assets/images/logout-icon.svg"></md-icon>
+                Logout
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+    </div>
   </div>
 </md-toolbar>
 <div layout="row" flex>
-    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
-
-    </md-sidenav>
-    <div layout="column" flex id="content">
-        <md-content layout="column" flex class="md-padding">
-
+    <div layout="column" flex id="content" class="ui-view-container">
+        <md-content layout="column" flex class="md-padding have-padding ng-cloak" ui-view>
+          <md-grid-list
+                md-cols-sm="1" md-cols-md="3" md-cols-gt-md="4"
+                md-row-height-gt-md="1:1" md-row-height="2:2"
+                md-gutter="10px" md-gutter-gt-sm="25px" >
+            <md-grid-tile ng-repeat="item in [1, 2, 3, 4, 5, 6]">
+              <a class="app-link-wrapper" md-ink-ripple="rgba(0,0,0,.1)" ui-sref="dashboard.userApp({app: item})">
+                <h1>{{item}}</h1>
+                <md-grid-tile-footer>
+                  <h3>{{item}}</h3>
+                  <h3>Enpoint: {{item}}</h3>
+                </md-grid-tile-footer>
+              </a>
+            </md-grid-tile>
+          </md-grid-list>
+          <img ng-click="showAddApp()" id="new-app-icon" src="assets/images/new-app-icon.png" alt="New App">
         </md-content>
     </div>
 </div>

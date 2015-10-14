@@ -10,7 +10,7 @@ angular.module('easeApp').controller('MainController', ['$scope', '$mdSidenav', 
         target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
         if (target.length) {
           var position = target.position().top + $("md-content").scrollTop();
-          $('#outer-wrapper,html,body').animate({
+          $('#outer-wrapper').animate({
             scrollTop: position
           }, 1000);
 
@@ -28,6 +28,7 @@ angular.module('easeApp').controller('MainController', ['$scope', '$mdSidenav', 
     $mdDialog.show({
       controller: 'LoginController',
       templateUrl: 'app/login/signup.html',
+      clickOutsideToClose: true,
       targetEvent: e
     });
   };
@@ -36,6 +37,7 @@ angular.module('easeApp').controller('MainController', ['$scope', '$mdSidenav', 
     $mdDialog.show({
       controller: 'LoginController',
       templateUrl: 'app/login/login.html',
+      clickOutsideToClose: true,
       parent: angular.element(document.body),
       targetEvent: e
     });
