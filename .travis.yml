@@ -8,6 +8,3 @@ before_script:
   - 'npm install -g bower karma grunt-cli jshint'
   - 'npm install' # install npm packages
   - 'bower install' # install bower packages
-
-after_script:
-  - 'gulp test' # or other command for build, run tests, etc
