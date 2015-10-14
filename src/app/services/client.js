@@ -11,6 +11,7 @@ angular.module('easeApp').factory('ClientService', function($http, $location, $m
 				$location.url('/dashboard');
 			})
 			.error(function(response){
+				// TODO - Return this message
 				console.log(response.error);
 			});	
 	};
@@ -22,6 +23,7 @@ angular.module('easeApp').factory('ClientService', function($http, $location, $m
 				makeUser(response);
 			})
 			.error(function(response){
+				// TODO - Return this message
 				console.log(response.error);
 			});
 	};
