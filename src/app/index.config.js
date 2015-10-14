@@ -10,6 +10,7 @@
     // Enable log
     $locationProvider.html5Mode(true);
     $logProvider.debugEnabled(true);
+    $locationProvider.html5Mode(true);
     $mdThemingProvider.theme('default').primaryPalette('blue').accentPalette('purple');
 
   };

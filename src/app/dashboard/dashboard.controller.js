@@ -1,7 +1,8 @@
 angular.module('easeApp').controller('DashboardController',
 ['$scope',
 '$mdDialog',
-function($scope, $mdDialog){
+'ClientService',
+function($scope, $mdDialog, ClientService){
 
   $scope.user = {
     email: 'dlasker20dlasker20@mail.missouri.edu.com',
@@ -19,6 +20,10 @@ function($scope, $mdDialog){
       clickOutsideToClose: true,
       targetEvent: e
     });
+  };
+  
+  $scope.logout = function(){
+     return ClientService.logout();
   };
 
   function AddAppController($scope, $mdDialog) {

@@ -1,7 +1,7 @@
 angular.module('easeApp').controller('MainController', ['$scope', '$mdSidenav', '$mdDialog', function($scope, $mdSidenav, $mdDialog){
 
   $(document).ready(function() {
-    $('a[href*=#]:not([href=#])').click(function() {
+    $('a[href*=#]:not([href=#])').click(function(e) {
       if($mdSidenav('left').isOpen()) {
         $mdSidenav('left').toggle();
       }
@@ -26,37 +26,22 @@ angular.module('easeApp').controller('MainController', ['$scope', '$mdSidenav', 
 
   $scope.showSignupDialog = function(e) {
     $mdDialog.show({
-      controller: SignUpController,
-      templateUrl: 'app/templates/signup.html',
-      clickOutsideToClose: true,
-      targetEvent: e
-    });
-  };
-
-  $scope.showLoginDialog = function(e) {
-    $mdDialog.show({
-      controller: LoginController,
-      templateUrl: 'app/templates/login.html',
+      controller: 'LoginController',
+      templateUrl: 'app/login/signup.html',
       clickOutsideToClose: true,
       parent: angular.element(document.body),
       targetEvent: e
     });
   };
 
-  function SignUpController($scope, $mdDialog) {
-    /*$scope.signup = {
-      email: "dlar@g.com",
-      password: ""
-    };*/
+  $scope.showLoginDialog = function(e) {
+    $mdDialog.show({
+      controller: 'LoginController',
+      templateUrl: 'app/login/login.html',
+      clickOutsideToClose: true,
+      parent: angular.element(document.body),
+      targetEvent: e
+    });
+  };
 
-    $scope.close = function() {
-      $mdDialog.hide();
-    };
-  }
-
-  function LoginController($scope, $mdDialog) {
-    $scope.close = function() {
-      $mdDialog.hide();
-    };
-  }
 }]);
