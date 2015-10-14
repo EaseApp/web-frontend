@@ -26,35 +26,19 @@ angular.module('easeApp').controller('MainController', ['$scope', '$mdSidenav', 
 
   $scope.showSignupDialog = function(e) {
     $mdDialog.show({
-      controller: SignUpController,
-      templateUrl: 'app/templates/signup.html',
+      controller: 'LoginController',
+      templateUrl: 'app/login/signup.html',
       targetEvent: e
     });
   };
 
   $scope.showLoginDialog = function(e) {
     $mdDialog.show({
-      controller: LoginController,
+      controller: 'LoginController',
       templateUrl: 'app/login/login.html',
       parent: angular.element(document.body),
       targetEvent: e
     });
   };
 
-  function SignUpController($scope, $mdDialog) {
-    /*$scope.signup = {
-      email: "dlar@g.com",
-      password: ""
-    };*/
-
-    $scope.close = function() {
-      $mdDialog.hide();
-    };
-  }
-
-  function LoginController($scope, $mdDialog) {
-    $scope.close = function() {
-      $mdDialog.hide();
-    };
-  }
 }]);

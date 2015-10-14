@@ -1,14 +1,20 @@
 angular.module('easeApp')
-.controller('LoginController', function($scope, $http) {
+.controller('LoginController', function($scope, ClientService, $mdDialog) {
   $scope.login = function(){
     var data = { username: $scope.login.email, password: $scope.login.password };
-    $http.post("http://localhost:3000/users/sign_in", data)
-      .then(function(response){
-        if (response.status == 200){
-          console.log("Sucess");
-        } else {
-          console.log("Failed");
-        }
-      })
-  }
+    ClientService.login(data);
+    console.log(ClientService);
+    return true;
+  };
+  
+  $scope.signup = function(){
+    var data = { username: $scope.signup.email, password: $scope.signup.password };
+    return ClientService.register(data);
+  };
+  
+  $scope.close = function() {
+      $mdDialog.hide();
+    };
+  
+  
 });
