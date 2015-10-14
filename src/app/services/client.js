@@ -1,4 +1,4 @@
-angular.module('easeApp').factory('ClientService', function($http){
+angular.module('easeApp').factory('ClientService', function($http, $location, $mdDialog){
 	var service = { user: {} };
 	var baseUrl = 'http://localhost:3000';
 	
@@ -7,6 +7,8 @@ angular.module('easeApp').factory('ClientService', function($http){
 		return $http.post(loginUrl, data)
 			.success(function(response){
 				makeUser(response);
+				$mdDialog.hide();
+				$location.url('/dashboard');
 			})
 			.error(function(response){
 				console.log(response.error);
@@ -24,9 +26,18 @@ angular.module('easeApp').factory('ClientService', function($http){
 			});
 	};
 	
+	service.logout = function(){
+		destroyUser();
+		$location.url('/');
+	};
+	
 	function makeUser(data){
 		service.user.name = data.username;
 		service.user.token = data.api_token;
+	}
+	
+	function destroyUser(){
+		service.user = {};
 	}
 	
 	return service;

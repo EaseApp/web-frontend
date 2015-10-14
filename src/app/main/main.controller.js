@@ -29,6 +29,7 @@ angular.module('easeApp').controller('MainController', ['$scope', '$mdSidenav', 
       controller: 'LoginController',
       templateUrl: 'app/login/signup.html',
       clickOutsideToClose: true,
+      parent: angular.element(document.body),
       targetEvent: e
     });
   };

@@ -1,9 +1,8 @@
 angular.module('easeApp')
-.controller('LoginController', function($scope, ClientService, $mdDialog) {
+.controller('LoginController', function($scope, ClientService, $mdDialog, $location) {
   $scope.login = function(){
     var data = { username: $scope.login.email, password: $scope.login.password };
     ClientService.login(data);
-    console.log(ClientService);
     return true;
   };
   
