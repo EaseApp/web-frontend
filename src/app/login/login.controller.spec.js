@@ -22,6 +22,12 @@
     it('should return the correct token', function(){
       var $scope = {};
       $controller('LoginController', { $scope: $scope });
+     
+    });
+    
+    it('should fail travis build', function(){
+      var $scope = {};
+       expect(1).toEqual(3, "1 !== 3");
       
       
     });
