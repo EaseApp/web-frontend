@@ -11,7 +11,9 @@ function runTests (singleRun, done) {
     configFile: path.join(__dirname, '/../karma.conf.js'),
     singleRun: singleRun,
     autoWatch: !singleRun
-  }, function() {
+  }, function(exitCode) {
+    console.log('Karma has exited with ' + exitCode);
+    process.exit(exitCode);
     done();
   });
 }
