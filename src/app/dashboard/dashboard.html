@@ -6,7 +6,7 @@
     <a href="/dashboard" class="toolbar-logo-stuff" hide-sm>
       <h1 id="title-text">Dashboard</h1>
     </a>
-    <div id="nav-right-actions-dash">
+    <div class="nav-right-actions-logged-in">
       <a target="_blank" href="https://github.com/EaseApp">
         <md-icon id="gitHubIconDashDocs" aria-label="Github" md-svg-src="assets/images/githubLight.svg"></md-icon>
       </a>
@@ -21,7 +21,7 @@
           <img id="profile-pic" ng-src="http://www.gravatar.com/avatar/{{user.emailHash}}"></img>
         </md-button>
         <md-menu-content width="4" >
-          <p id="profile-popup-email">{{user.email}}</p>
+          <p id="profile-popup-email">{{user.name}}</p>
           <md-menu-item>
             <md-button href="/dashboard" ng-click="$mdCloseMenu($event)">
               <md-icon md-svg-icon="assets/images/apps-icon.svg"></md-icon>
