@@ -1,4 +1,6 @@
-angular.module('easeApp').controller('MainController', ['$scope', '$mdSidenav', '$mdDialog', function($scope, $mdSidenav, $mdDialog){
+angular.module('easeApp').controller('MainController', ['$scope', '$mdSidenav', '$mdDialog', 'ClientService', function($scope, $mdSidenav, $mdDialog, ClientService){
+
+  $scope.user = ClientService.user;
 
   $(document).ready(function() {
     $('a[href*=#]:not([href=#])').click(function(e) {
@@ -42,6 +44,10 @@ angular.module('easeApp').controller('MainController', ['$scope', '$mdSidenav', 
       parent: angular.element(document.body),
       targetEvent: e
     });
+  };
+
+  $scope.logout = function(){
+     return ClientService.logout();
   };
 
 }]);
