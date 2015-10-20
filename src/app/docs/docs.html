@@ -9,6 +9,44 @@
     <a href="/" class="toolbar-logo-stuff" hide-sm>
       <h1 id="title-text">Documentation</h1>
     </a>
+    <div ng-class="{ 'nav-right-actions': !user.name, 'nav-right-actions-logged-in': user.name }">
+      <a target="_blank" href="https://github.com/EaseApp" hide-sm>
+        <md-icon id="gitHubIconNav" aria-label="Github" md-svg-src="assets/images/githubLight.svg"></md-icon>
+      </a>
+      <md-button ng-click="showSignupDialog($event)" ng-if="!user.name">
+        Sign Up
+      </md-button>
+      <md-button ng-click="showLoginDialog($event)" ng-if="!user.name">
+        Login
+      </md-button>
+      <md-menu md-offset="0 64" md-position-mode="target-right target" ng-if="user.name">
+        <md-button aria-label="Open menu" class="md-icon-button no-outline" ng-click="$mdOpenMenu($event)">
+          <img id="profile-pic" ng-src="http://www.gravatar.com/avatar/{{user.emailHash}}"></img>
+        </md-button>
+        <md-menu-content width="4" >
+          <p id="profile-popup-email">{{user.email}}</p>
+          <md-menu-item>
+            <md-button href="/dashboard" ng-click="$mdCloseMenu($event)">
+              <md-icon md-svg-icon="assets/images/apps-icon.svg"></md-icon>
+              My Apps
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button>
+              <md-icon md-svg-icon="assets/images/user-icon.svg"></md-icon>
+              My Account
+            </md-button>
+          </md-menu-item>
+          <md-menu-divider></md-menu-divider>
+          <md-menu-item>
+            <md-button ng-click="logout()">
+              <md-icon md-svg-icon="assets/images/logout-icon.svg"></md-icon>
+              Logout
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </div>
   </div>
 </md-toolbar>
 <div layout="row" flex>

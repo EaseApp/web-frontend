@@ -27,7 +27,8 @@
         controller: 'UserAppController'
       }).state('login', {
         url: '/login',
-        controller: 'LoginController'
+        controller: 'LoginController',
+        templateUrl: 'app/login/login.html'
       });
 
     $urlRouterProvider.otherwise('/');

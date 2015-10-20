@@ -239,7 +239,7 @@ md-toolbar {
   right: 5px;
 }
 
-#nav-right-actions-dash {
+.nav-right-actions-logged-in {
   position: absolute;
   top: 8px;
   right: 5px;
