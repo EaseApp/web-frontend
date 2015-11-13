@@ -4,8 +4,13 @@
 
   angular
     .module('easeApp')
-    .constant('malarkey', malarkey)
-    .constant('toastr', toastr)
-    .constant('moment', moment);
+   .constant('AUTH_EVENTS', {
+      notAuthenticated: 'auth-not-authenticated',
+      notAuthorized: 'auth-not-authorized'
+    })
+    .constant('BASE_URL', {
+      localhost: 'http://localhost:3000',
+      prod: 'http://ease-62q56ueo.cloudapp.net'
+    });
 
 })();

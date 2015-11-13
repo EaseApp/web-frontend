@@ -18,6 +18,7 @@
       </a>
       <md-menu md-offset="0 64" md-position-mode="target-right target">
         <md-button aria-label="Open menu" class="md-icon-button no-outline" ng-click="$mdOpenMenu($event)">
+          <span>{{console.log(user)}}</span>
           <img id="profile-pic" ng-src="http://www.gravatar.com/avatar/{{user.emailHash}}"></img>
         </md-button>
         <md-menu-content width="4" >
@@ -53,7 +54,7 @@
                 md-cols-sm="1" md-cols-md="3" md-cols-gt-md="4"
                 md-row-height-gt-md="1:1" md-row-height="2:2"
                 md-gutter="10px" md-gutter-gt-sm="25px" >
-            <md-grid-tile ng-repeat="item in [1, 2, 3, 4, 5, 6]">
+            <md-grid-tile ng-repeat="item in getApplications()">
               <a class="app-link-wrapper" md-ink-ripple="rgba(0,0,0,.1)" ui-sref="dashboard.userApp({app: item})">
                 <h1>{{item}}</h1>
                 <md-grid-tile-footer>
