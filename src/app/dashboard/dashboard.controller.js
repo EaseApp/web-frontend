@@ -1,10 +1,20 @@
 angular.module('easeApp').controller('DashboardController',
 ['$scope',
 '$mdDialog',
-'ClientService',
-function($scope, $mdDialog, ClientService){
+'$state',
+'AuthService',
+'AUTH_EVENTS',
+'BASE_URL',
+'$http',
+function($scope,$state, $mdDialog, AuthService, AUTH_EVENTS, BASE_URL, $http){
 
-  $scope.user = ClientService.user;
+  $scope.user = AuthService.user();
+  
+  $scope.$on(AUTH_EVENTS.notAuthenticated, function(event){
+    AuthService.logout();
+    $state.go('main');
+    var alertPopup = alert('Session Lost! Please login again');
+  });
 
   $scope.toggleSidenav = function(menuId) {
     $mdSidenav(menuId).toggle();
@@ -18,9 +28,17 @@ function($scope, $mdDialog, ClientService){
       targetEvent: e
     });
   };
+  
+  $scope.getApplications = function(){
+    // $http.get(BASE_URL.localhost).success(function(response){
+    //   console.log(response);
+    //   });
+      
+      return [1,2,3,4,5];
+  };
 
   $scope.logout = function(){
-     return ClientService.logout();
+     return AuthService.logout();
   };
 
   function AddAppController($scope, $mdDialog) {
