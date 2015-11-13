@@ -55,16 +55,16 @@
                 md-row-height-gt-md="1:1" md-row-height="2:2"
                 md-gutter="10px" md-gutter-gt-sm="25px" >
             <md-grid-tile ng-repeat="app in applications">
-              <a class="app-link-wrapper" md-ink-ripple="rgba(0,0,0,.1)" ui-sref="dashboard.userApp({app: item})">
-                <h1>{{item}}</h1>
+              <a class="app-link-wrapper" md-ink-ripple="rgba(0,0,0,.1)" ui-sref="dashboard.userApp({app: item.app_token})">
+                <h1>{{app.name}}</h1>
                 <md-grid-tile-footer>
                   <h3>{{item}}</h3>
-                  <h3>Enpoint: {{item}}</h3>
+                  <h3>An awesome application of infinite possibilities</h3>
                 </md-grid-tile-footer>
               </a>
             </md-grid-tile>
           </md-grid-list>
-          <img ng-click="showAddApp()" id="new-app-icon" src="assets/images/new-app-icon.png" alt="New App">
+          <img ng-click="showAddApp($event)" id="new-app-icon" src="assets/images/new-app-icon.png" alt="New App">
         </md-content>
     </div>
 </div>

@@ -9,15 +9,15 @@
     </div>
   </md-toolbar>
   <md-dialog-content>
-   <form action"#" method="post" name="addAppForm">
+   <form action"#" method="post" name="addAppForm" ng-submit="createApplication()">
      <md-input-container>
       <label>New App Name</label>
-      <input ng-model="addApp.appName" name="appName" ng-required="true" required>
+      <input ng-model="appName" name="appName" ng-required="true" required>
       <div ng-messages="addAppForm.appName.$error" ng-if='submitted'>
         <div ng-message="required">Required</div>
       </div>
      </md-input-container>
-     <md-button class="md-primary md-raised" ng-click="submitted=true" ng-submit="">
+     <md-button class="md-primary md-raised" ng-click="submitted=true" type="submit">
        Create
      </md-button>
    </form>
