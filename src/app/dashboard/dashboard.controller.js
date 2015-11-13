@@ -7,8 +7,12 @@ angular.module('easeApp').controller('DashboardController',
 'BASE_URL',
 '$http',
 function($scope,$state, $mdDialog, AuthService, AUTH_EVENTS, BASE_URL, $http){
+  
+  var baseUrl = BASE_URL.localhost;
 
   $scope.user = AuthService.user();
+  
+  $scope.applications = [];
   
   $scope.$on(AUTH_EVENTS.notAuthenticated, function(event){
     AuthService.logout();
@@ -29,12 +33,12 @@ function($scope,$state, $mdDialog, AuthService, AUTH_EVENTS, BASE_URL, $http){
     });
   };
   
-  $scope.getApplications = function(){
-    // $http.get(BASE_URL.localhost).success(function(response){
-    //   console.log(response);
-    //   });
-      
-      return [1,2,3,4,5];
+  var getApplications = function(){
+    var applicationsListUrl = baseUrl+'/users/applications';
+    $http.get(applicationsListUrl).success(function(response){
+      console.log(response);
+      $scope.applications = response;
+    });
   };
 
   $scope.logout = function(){
@@ -46,5 +50,10 @@ function($scope,$state, $mdDialog, AuthService, AUTH_EVENTS, BASE_URL, $http){
       $mdDialog.hide();
     };
   }
+  
+  var init = function(){
+    getApplications();
+  };
+  init();
 
 }]);
