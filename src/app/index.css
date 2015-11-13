@@ -798,3 +798,11 @@ md-progress-circular {
 }
 
 /*End Tree Stuff*/
+md-sidenav.md-locked-open {
+  width: 250px;
+  min-width: 250px;
+}
+
+#content-wrapper {
+  height: calc(100% - 64px);
+}
