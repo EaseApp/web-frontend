@@ -1,4 +1,4 @@
-angular.module('easeApp').factory('AuthService', function($http, $location, $state, $mdDialog, $cookies, md5, BASE_URL ){
+angular.module('easeApp').factory('AuthService', function($http, $location, $state, $mdDialog, $cookies, md5, BASE_URL, $mdToast ){
 	var service = { user: {} };
 	var baseUrl = BASE_URL.prod;
 
@@ -14,8 +14,7 @@ angular.module('easeApp').factory('AuthService', function($http, $location, $sta
 				$location.url('/dashboard');
 			})
 			.error(function(response){
-				// TODO - Return this message
-				console.log(response.error);
+				$mdToast.show($mdToast.simple().content(response.error).action('Ok').highlightAction(false).position('bottom right'));
 			});
 	};
 
@@ -26,10 +25,12 @@ angular.module('easeApp').factory('AuthService', function($http, $location, $sta
 				var emailHash = md5.createHash(response.username || '');
 				var user = {name: response.username, token: response.api_token, emailHash: emailHash};
 				storeUserCredentials(user);
+				$http.defaults.headers.common['Authorization'] = service.user.token;
+				$mdDialog.hide();
+				$location.url('/dashboard');
 			})
 			.error(function(response){
-				// TODO - Return this message
-				console.log(response.error);
+				$mdToast.show($mdToast.simple().content(response.error).action('Ok').highlightAction(false).position('bottom right'));
 			});
 	};
 

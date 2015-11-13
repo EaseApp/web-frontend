@@ -10,7 +10,7 @@
     
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
       AuthService.loadUserCredentials();
-      if (!AuthService.isAuthenticated()) {
+      if (toState.authenticate && !AuthService.isAuthenticated()) {
         console.log('Not authenticated');
         if (toState.name !== 'home') {
           event.preventDefault();

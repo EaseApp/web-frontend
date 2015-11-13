@@ -4,12 +4,11 @@ angular.module('easeApp')
   $scope.login = function(){
     var data = { username: $scope.login.email, password: $scope.login.password };
     AuthService.login(data);
-    return true;
   };
   
   $scope.signup = function(){
     var data = { username: $scope.signup.email, password: $scope.signup.password };
-    return AuthService.register(data);
+    AuthService.register(data);
   };
   
   $scope.close = function() {

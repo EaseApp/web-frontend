@@ -1,6 +1,6 @@
 <div id="selected-app-header">
   <h1>App {{app.name}}</h1>
-  <h2>Endpoint: {{app.name}}</h2>
+  <h2>Endpoint: {{$stateParams}}</h2>
   <md-menu id="settings-menu" md-position-mode="target-right target">
     <md-button aria-label="Open menu" class="md-icon-button no-outline" ng-click="$mdOpenMenu($event)">
       <md-icon aria-label="Settings" md-svg-src="assets/images/settings-icon.svg"></md-icon>

@@ -1,14 +1,20 @@
 angular.module('easeApp').controller('DashboardController',
 ['$scope',
-'$mdDialog',
 '$state',
+'$mdSidenav',
+'$mdDialog',
 'AuthService',
 'AUTH_EVENTS',
 'BASE_URL',
 '$http',
-function($scope,$state, $mdDialog, AuthService, AUTH_EVENTS, BASE_URL, $http){
-
+function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, BASE_URL, $http){
+  
+  var baseUrl = BASE_URL.localhost;
   $scope.user = AuthService.user();
+  $scope.applications = [];
+  $scope.$watch('$scope.applications', function(){
+    getApplications();
+  });
   
   $scope.$on(AUTH_EVENTS.notAuthenticated, function(event){
     AuthService.logout();
@@ -29,22 +35,37 @@ function($scope,$state, $mdDialog, AuthService, AUTH_EVENTS, BASE_URL, $http){
     });
   };
   
-  $scope.getApplications = function(){
-    // $http.get(BASE_URL.localhost).success(function(response){
-    //   console.log(response);
-    //   });
-      
-      return [1,2,3,4,5];
+  var getApplications = function(){
+    var applicationsListUrl = baseUrl+'/users/applications';
+    $http.get(applicationsListUrl).success(function(response){
+      $scope.applications = response;
+    });
   };
 
   $scope.logout = function(){
      return AuthService.logout();
   };
 
-  function AddAppController($scope, $mdDialog) {
+  function AddAppController($scope, $mdDialog, $mdToast, $http, $state) {
     $scope.close = function() {
       $mdDialog.hide();
     };
+    
+     $scope.createApplication = function(){
+       var createApplicationsUrl = baseUrl+'/users/applications/'+$scope.appName;
+       $http.post(createApplicationsUrl, {}).success(function(response){
+         $mdToast.show($mdToast.simple().content($scope.appName + ' created!'));
+         $scope.close();
+         console.log(response);
+         $state.go('dashboard.userApp', {name: response.name, token: response.app_token});
+       });
+       
+    };
   }
+  
+  var init = function(){
+    getApplications();
+  };
+  init();
 
 }]);
