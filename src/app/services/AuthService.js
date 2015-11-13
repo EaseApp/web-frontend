@@ -1,6 +1,6 @@
 angular.module('easeApp').factory('AuthService', function($http, $location, $state, $mdDialog, $cookies, md5, BASE_URL ){
 	var service = { user: {} };
-	var baseUrl = BASE_URL.localhost;
+	var baseUrl = BASE_URL.prod;
 
 	var login = function(data){
 		var loginUrl = baseUrl + "/users/sign_in";
@@ -32,7 +32,7 @@ angular.module('easeApp').factory('AuthService', function($http, $location, $sta
 				console.log(response.error);
 			});
 	};
-	
+
 	var logout = function(){
 		destroyUserCredentials();
 		if($location.path() == '/') {
@@ -41,40 +41,40 @@ angular.module('easeApp').factory('AuthService', function($http, $location, $sta
 			$location.url('/');
 		}
 	};
-	
+
 	var LOCAL_TOKEN_KEY = 'EaseApp';
 	var isAuthenticated = false;
-	
+
 	var loadUserCredentials = function() {
 		var windowUser = window.localStorage.getItem(LOCAL_TOKEN_KEY);
 		if (windowUser) {
 			useCredentials(JSON.parse(windowUser));
 		}
 	};
- 
+
 	function storeUserCredentials(token) {
 		console.log('stored',token);
 		window.localStorage.setItem(LOCAL_TOKEN_KEY, JSON.stringify(token));
 		useCredentials(token);
 	}
-	
+
 	function useCredentials(user) {
 		isAuthenticated = true;
 		service.user.name = user.name;
 		service.user.token = user.token;
 		service.user.emailHash = user.emailHash;
-		
+
 		// Set the token as header for your requests!
 		$http.defaults.headers.common['Authorization'] = user.token;
 	}
-	
+
 	function destroyUserCredentials() {
 		service.user = {};
 		isAuthenticated = false;
 		$http.defaults.headers.common['Authorization'] = '';
 		window.localStorage.removeItem(LOCAL_TOKEN_KEY);
 	}
-	
+
 	return {
 		login: login,
 		logout: logout,
