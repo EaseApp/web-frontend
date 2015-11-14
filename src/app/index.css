@@ -1,5 +1,10 @@
 @import url(//fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
 
+@font-face {
+    font-family: Glyphicons Halflings;
+    src: url('../assets/fonts/glyphicons-halflings-regular.woff');
+}
+
 .ui-view-container {
   position: relative;
 }

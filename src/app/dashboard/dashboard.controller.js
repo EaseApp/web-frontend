@@ -8,14 +8,14 @@ angular.module('easeApp').controller('DashboardController',
 'BASE_URL',
 '$http',
 function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, BASE_URL, $http){
-  
-  var baseUrl = BASE_URL.localhost;
+
+  var baseUrl = BASE_URL.prod;
   $scope.user = AuthService.user();
   $scope.applications = [];
   $scope.$watch('$scope.applications', function(){
     getApplications();
   });
-  
+
   $scope.$on(AUTH_EVENTS.notAuthenticated, function(event){
     AuthService.logout();
     $state.go('main');
@@ -34,7 +34,7 @@ function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, BASE_U
       targetEvent: e
     });
   };
-  
+
   var getApplications = function(){
     var applicationsListUrl = baseUrl+'/users/applications';
     $http.get(applicationsListUrl).success(function(response){
@@ -50,7 +50,7 @@ function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, BASE_U
     $scope.close = function() {
       $mdDialog.hide();
     };
-    
+
      $scope.createApplication = function(){
        var createApplicationsUrl = baseUrl+'/users/applications/'+$scope.appName;
        $http.post(createApplicationsUrl, {}).success(function(response){
@@ -59,10 +59,10 @@ function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, BASE_U
          console.log(response);
          $state.go('dashboard.userApp', {name: response.name, token: response.app_token});
        });
-       
+
     };
   }
-  
+
   var init = function(){
     getApplications();
   };
