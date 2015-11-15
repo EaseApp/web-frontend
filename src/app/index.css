@@ -802,7 +802,12 @@ md-progress-circular {
     content: "\e014";
 }
 
+.hidden {
+    display: none!important;
+    visibility: hidden!important;
+}
 /*End Tree Stuff*/
+
 md-sidenav.md-locked-open {
   width: 250px;
   min-width: 250px;
