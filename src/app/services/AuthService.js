@@ -36,7 +36,7 @@ angular.module('easeApp').factory('AuthService', function($http, $location, $sta
 
 	var logout = function(){
 		destroyUserCredentials();
-		if($location.path() == '/') {
+		if($location.path() == '/' || $location.path() == '/docs') {
 			$state.go($state.$current, null, { reload: true });
 		} else {
 			$location.url('/');
