@@ -1,9 +1,9 @@
-angular.module('easeApp').factory('AuthService', function($http, $location, $state, $mdDialog, $cookies, md5, BASE_URL, $mdToast ){
+angular.module('easeApp').factory('AuthService', function($http, $location, $state, $mdDialog, $cookies, md5, UrlService, $mdToast ){
 	var service = { user: {} };
-	var baseUrl = BASE_URL.prod;
+	// var baseUrl = BASE_URL.localhost;
 
 	var login = function(data){
-		var loginUrl = baseUrl + "/users/sign_in";
+		var loginUrl = UrlService + "/users/sign_in";
 		$http.post(loginUrl, data)
 			.success(function(response){
 				var emailHash = md5.createHash(response.username || '');
@@ -19,7 +19,7 @@ angular.module('easeApp').factory('AuthService', function($http, $location, $sta
 	};
 
 	var register = function(data){
-		var registerUrl = baseUrl + "/users/sign_up";
+		var registerUrl = UrlService + "/users/sign_up";
 		return $http.post(registerUrl, data)
 			.success(function(response){
 				var emailHash = md5.createHash(response.username || '');
