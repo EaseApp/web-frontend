@@ -6,7 +6,7 @@
     .config(['$urlMatcherFactoryProvider', '$logProvider', '$mdThemingProvider', '$locationProvider', config]);
 
   /** @ngInject */
-  function config($urlMatcherFactory, $logProvider, $mdThemingProvider, $locationProvider) {
+  function config($urlMatcherFactory, $logProvider, $mdThemingProvider, $locationProvider, $urlRouterProvider) {
     // Enable log
     $locationProvider.html5Mode(true);
     $logProvider.debugEnabled(true);

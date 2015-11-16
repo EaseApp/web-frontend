@@ -4,7 +4,7 @@ angular.module('easeApp').controller('UserAppController',
 '$stateParams',
 'AuthService',
 '$http',
-function($scope, $mdDialog,$stateParams, AuthService, $http){
+function($scope, $mdDialog, $stateParams, AuthService, $http){
   $scope.app =  $stateParams;
 
   $scope.showConfirmClear = function(ev) {

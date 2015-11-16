@@ -58,7 +58,7 @@
                 md-gutter="10px" md-gutter-gt-sm="25px" >
             
             <md-grid-tile ng-repeat="app in applications">
-              <a class="app-link-wrapper" md-ink-ripple="rgba(0,0,0,.1)" ui-sref="dashboard.userApp({ token: app.app_token, name: app.name})">
+              <a class="app-link-wrapper" md-ink-ripple="rgba(0,0,0,.1)" href="{{'/dashboard/app?name=' + app.name + '&token=' + app.app_token}}">
                 <h1>{{app.name}}</h1>
                 <md-grid-tile-footer>
                   <h3>An awesome application of infinite possibilities</h3>

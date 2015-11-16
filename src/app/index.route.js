@@ -25,8 +25,7 @@
         controller: 'DashboardController',
         authenticate: true
       }).state('dashboard.userApp', {
-        url: '/app',
-        params: {name: null, token: null},
+        url: '/app?name&token',
         templateUrl: 'app/userApp/userApp.html',
         controller: 'UserAppController',
         authenticate: true

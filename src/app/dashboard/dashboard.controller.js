@@ -65,7 +65,7 @@ function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, UrlSer
          $mdToast.show($mdToast.simple().content($scope.appName + ' created!'));
          $scope.close();
          addApplication(response);
-         $state.go('dashboard.userApp', {name: response.name, token: response.app_token});
+         $state.transitionTo('dashboard.userApp', {name: response.name, token: response.app_token}, {reload: true, inherit: false, notify: true});
        });
     };
   }
