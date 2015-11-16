@@ -17,7 +17,7 @@
           $state.go('home');
         }
       }
-    });
+    });    
 
     $log.debug('runBlock end');
   }
