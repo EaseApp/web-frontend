@@ -5,21 +5,20 @@ angular.module('easeApp').controller('DashboardController',
 '$mdDialog',
 'AuthService',
 'AUTH_EVENTS',
-'BASE_URL',
+'UrlService',
 '$http',
-function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, BASE_URL, $http){
-
-  var baseUrl = BASE_URL.prod;
+function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, UrlService, $http){
+  
   $scope.user = AuthService.user();
   $scope.applications = [];
   $scope.$watch('$scope.applications', function(){
     getApplications();
   });
-
-  $scope.$on(AUTH_EVENTS.notAuthenticated, function(event){
+  
+  $scope.$on(AUTH_EVENTS.notAuthenticated, function(event, $mdToast){
     AuthService.logout();
     $state.go('main');
-    var alertPopup = alert('Session Lost! Please login again');
+    $mdToast.show($mdToast.simple().content('Session Lost! Please login again'));
   });
 
   $scope.toggleSidenav = function(menuId) {
@@ -36,7 +35,7 @@ function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, BASE_U
   };
 
   var getApplications = function(){
-    var applicationsListUrl = baseUrl+'/users/applications';
+    var applicationsListUrl = UrlService+'/users/applications';
     $http.get(applicationsListUrl).success(function(response){
       $scope.applications = response;
     });
@@ -52,7 +51,7 @@ function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, BASE_U
     };
 
      $scope.createApplication = function(){
-       var createApplicationsUrl = baseUrl+'/users/applications/'+$scope.appName;
+       var createApplicationsUrl = UrlService+'/users/applications/'+$scope.appName;
        $http.post(createApplicationsUrl, {}).success(function(response){
          $mdToast.show($mdToast.simple().content($scope.appName + ' created!'));
          $scope.close();
