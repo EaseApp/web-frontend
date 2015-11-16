@@ -1,7 +1,7 @@
-angular.module('easeApp').controller('DocsController', ['$scope', 'ClientService', function($scope, ClientService) {
-  $scope.user = ClientService.user;
+angular.module('easeApp').controller('DocsController', ['$scope', 'AuthService', function($scope, AuthService) {
+  $scope.user = AuthService.user();
 
   $scope.logout = function(){
-     return ClientService.logout();
+     return AuthService.logout();
   };
 }]);

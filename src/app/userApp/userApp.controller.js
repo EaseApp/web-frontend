@@ -3,9 +3,7 @@ angular.module('easeApp').controller('UserAppController',
 '$mdDialog',
 '$stateParams',
 function($scope, $mdDialog,$stateParams){
-  $scope.app =  {
-    name : $stateParams.app
-  };
+  $scope.app =  $stateParams;
 
   $scope.showConfirmClear = function(ev) {
     // Appending dialog to document.body to cover sidenav in docs app
@@ -123,4 +121,8 @@ $scope.data = [{
 
 
 
-}]);
+}])
+.run((['$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams){
+  $rootScope.$state = $state;
+  $rootScope.$stateParams = $stateParams;
+}]));

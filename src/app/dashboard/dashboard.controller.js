@@ -1,19 +1,24 @@
 angular.module('easeApp').controller('DashboardController',
 ['$scope',
-'$mdDialog',
 '$state',
+'$mdSidenav',
+'$mdDialog',
 'AuthService',
 'AUTH_EVENTS',
-'BASE_URL',
+'UrlService',
 '$http',
-function($scope,$state, $mdDialog, AuthService, AUTH_EVENTS, BASE_URL, $http){
-
-  $scope.user = AuthService.user();
+function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, UrlService, $http){
   
-  $scope.$on(AUTH_EVENTS.notAuthenticated, function(event){
+  $scope.user = AuthService.user();
+  $scope.applications = [];
+  $scope.$watch('$scope.applications', function(){
+    getApplications();
+  });
+  
+  $scope.$on(AUTH_EVENTS.notAuthenticated, function(event, $mdToast){
     AuthService.logout();
     $state.go('main');
-    var alertPopup = alert('Session Lost! Please login again');
+    $mdToast.show($mdToast.simple().content('Session Lost! Please login again'));
   });
 
   $scope.toggleSidenav = function(menuId) {
@@ -29,22 +34,37 @@ function($scope,$state, $mdDialog, AuthService, AUTH_EVENTS, BASE_URL, $http){
     });
   };
   
-  $scope.getApplications = function(){
-    // $http.get(BASE_URL.localhost).success(function(response){
-    //   console.log(response);
-    //   });
-      
-      return [1,2,3,4,5];
+  var getApplications = function(){
+    var applicationsListUrl = UrlService+'/users/applications';
+    $http.get(applicationsListUrl).success(function(response){
+      $scope.applications = response;
+    });
   };
 
   $scope.logout = function(){
      return AuthService.logout();
   };
 
-  function AddAppController($scope, $mdDialog) {
+  function AddAppController($scope, $mdDialog, $mdToast, $http, $state) {
     $scope.close = function() {
       $mdDialog.hide();
     };
+    
+     $scope.createApplication = function(){
+       var createApplicationsUrl = UrlService+'/users/applications/'+$scope.appName;
+       $http.post(createApplicationsUrl, {}).success(function(response){
+         $mdToast.show($mdToast.simple().content($scope.appName + ' created!'));
+         $scope.close();
+         console.log(response);
+         $state.go('dashboard.userApp', {name: response.name, token: response.app_token});
+       });
+       
+    };
   }
+  
+  var init = function(){
+    getApplications();
+  };
+  init();
 
 }]);

@@ -12,23 +12,29 @@
         url: '/',
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
-        controllerAs: 'main'
+        controllerAs: 'main',
+        authenticate: true
       }).state('docs', {
         url: '/docs',
         templateUrl: 'app/docs/docs.html',
-        controller: 'DocsController'
+        controller: 'DocsController',
+        authenticate: false
       }).state('dashboard', {
         url: '/dashboard',
         templateUrl: 'app/dashboard/dashboard.html',
-        controller: 'DashboardController'
+        controller: 'DashboardController',
+        authenticate: true
       }).state('dashboard.userApp', {
-        url: '/:app',
+        url: '/app',
+        params: {name: null, token: null},
         templateUrl: 'app/userApp/userApp.html',
-        controller: 'UserAppController'
+        controller: 'UserAppController',
+        authenticate: true
       }).state('login', {
         url: '/login',
         controller: 'LoginController',
-        templateUrl: 'app/login/login.html'
+        templateUrl: 'app/login/login.html',
+        authenticate: false
       });
 
     $urlRouterProvider.otherwise('/');
