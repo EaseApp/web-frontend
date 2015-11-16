@@ -1,5 +1,10 @@
 @import url(//fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
 
+@font-face {
+    font-family: Glyphicons Halflings;
+    src: url('../assets/fonts/glyphicons-halflings-regular.woff');
+}
+
 .ui-view-container {
   position: relative;
 }
@@ -797,4 +802,26 @@ md-progress-circular {
     content: "\e014";
 }
 
+.hidden {
+    display: none!important;
+    visibility: hidden!important;
+}
 /*End Tree Stuff*/
+
+md-sidenav.md-locked-open {
+  width: 250px;
+  min-width: 250px;
+}
+
+#content-wrapper {
+  height: calc(100% - 64px);
+}
+
+#add-tree-data-item {
+  display: block;
+  margin: 0px auto;
+}
+
+.angular-ui-tree-empty {
+  display: none;
+}

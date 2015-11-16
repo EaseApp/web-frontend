@@ -33,7 +33,7 @@ function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, UrlSer
       targetEvent: e
     });
   };
-  
+
   var getApplications = function(){
     var applicationsListUrl = UrlService+'/users/applications';
     $http.get(applicationsListUrl).success(function(response){
@@ -49,7 +49,7 @@ function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, UrlSer
     $scope.close = function() {
       $mdDialog.hide();
     };
-    
+
      $scope.createApplication = function(){
        var createApplicationsUrl = UrlService+'/users/applications/'+$scope.appName;
        $http.post(createApplicationsUrl, {}).success(function(response){
@@ -58,10 +58,10 @@ function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, UrlSer
          console.log(response);
          $state.go('dashboard.userApp', {name: response.name, token: response.app_token});
        });
-       
+
     };
   }
-  
+
   var init = function(){
     getApplications();
   };
