@@ -1,6 +1,5 @@
 angular.module('easeApp').factory('AuthService', function($http, $location, $state, $mdDialog, $cookies, md5, UrlService, $mdToast ){
 	var service = { user: {} };
-	// var baseUrl = BASE_URL.localhost;
 
 	var login = function(data){
 		var loginUrl = UrlService + "/users/sign_in";
