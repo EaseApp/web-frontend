@@ -10,6 +10,7 @@ angular.module('easeApp').controller('DashboardController',
 function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, UrlService, $http){
   
   $scope.user = AuthService.user();
+  $scope.loading = true;
   $scope.applications = [];
   $scope.$watch('$scope.applications', function(){
     getApplications();
@@ -38,27 +39,34 @@ function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, UrlSer
     var applicationsListUrl = UrlService+'/users/applications';
     $http.get(applicationsListUrl).success(function(response){
       $scope.applications = response;
+    }).then(function(){
+      $scope.loading = false;
     });
   };
 
   $scope.logout = function(){
      return AuthService.logout();
   };
+  
+  var addApplication = function(application){
+    $scope.applications.push(application);
+  };
 
   function AddAppController($scope, $mdDialog, $mdToast, $http, $state) {
+    $scope.loading = false;
     $scope.close = function() {
       $mdDialog.hide();
     };
 
      $scope.createApplication = function(){
+       $scope.loading = true;
        var createApplicationsUrl = UrlService+'/users/applications/'+$scope.appName;
        $http.post(createApplicationsUrl, {}).success(function(response){
          $mdToast.show($mdToast.simple().content($scope.appName + ' created!'));
          $scope.close();
-         console.log(response);
+         addApplication(response);
          $state.go('dashboard.userApp', {name: response.name, token: response.app_token});
        });
-
     };
   }
 
