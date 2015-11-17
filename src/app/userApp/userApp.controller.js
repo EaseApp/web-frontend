@@ -6,6 +6,8 @@ angular.module('easeApp').controller('UserAppController',
 '$http',
 function($scope, $mdDialog, $stateParams, AuthService, $http){
   $scope.app =  $stateParams;
+  var user = AuthService.user();
+  var app = new Ease(user.name, $stateParams.name, $stateParams.token);
 
   $scope.showConfirmClear = function(ev) {
     // Appending dialog to document.body to cover sidenav in docs app
@@ -18,9 +20,7 @@ function($scope, $mdDialog, $stateParams, AuthService, $http){
           .cancel('Cancel')
           .clickOutsideToClose(true);
     $mdDialog.show(confirm).then(function() {
-      $scope.status = 'cleared';
-    }, function() {
-      $scope.status = 'canceled';
+        // Clear application (Call delete on root path to clear the application)
     });
   };
 
@@ -35,9 +35,7 @@ function($scope, $mdDialog, $stateParams, AuthService, $http){
           .cancel('Cancel')
           .clickOutsideToClose(true);
     $mdDialog.show(confirm).then(function() {
-      $scope.status = 'deleted';
-    }, function() {
-      $scope.status = 'canceled';
+      // $http
     });
   };
 
@@ -71,9 +69,9 @@ function($scope, $mdDialog, $stateParams, AuthService, $http){
     $scope.$broadcast('expandAll');
   };
   
-  $scope.data = function($http){
-    var ApplicationUrl = 
-    $http.get()
+  $scope.data = function(){
+    var response = app.read("/users");
+    return [JSON.parse(response)];
   };
 
   // $scope.data = [{
