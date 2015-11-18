@@ -8,14 +8,12 @@ angular.module('easeApp').controller('DashboardController',
 'UrlService',
 '$http',
 function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, UrlService, $http){
-  
+
   $scope.user = AuthService.user();
   $scope.loading = true;
   $scope.applications = [];
-  $scope.$watch('$scope.applications', function(){
-    getApplications();
-  });
-  
+  var initalLoad = true;
+
   $scope.$on(AUTH_EVENTS.notAuthenticated, function(event, $mdToast){
     AuthService.logout();
     $state.go('main');
@@ -41,13 +39,21 @@ function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, UrlSer
       $scope.applications = response;
     }).then(function(){
       $scope.loading = false;
+      if(initalLoad) {
+        $scope.$watch('$scope.applications', function(){
+          if(!initalLoad) {
+            getApplications();
+          }
+          initalLoad = false;
+        },true);
+      }
     });
   };
 
   $scope.logout = function(){
      return AuthService.logout();
   };
-  
+
   var addApplication = function(application){
     $scope.applications.push(application);
   };
