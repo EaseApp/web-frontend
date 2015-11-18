@@ -1,56 +1,60 @@
 function Ease(username, appName, appToken) {
   var urls = {
-    localhost: 'localhost:3000/',
-    prod: 'ease-62q56ueo.cloudapp.net/'
+    localhost: 'localhost:3001',
+    prod: 'ease-62q56ueo.cloudapp.net:3001'
   };
-  this.baseUrl = urls.prod;
+  this.baseUrl = urls.localhost;
   this.username = username;
   this.appName = appName;
   this.appToken = appToken;
 
-  this.sendRequest = function(url, type, dataToSend) {
+  this.sendRequest = function(url, type, dataToSend, callback) {
     var xhr = new XMLHttpRequest();
     if(type != "GET") {
-      xhr.open(type, url, false);
+      xhr.open(type, url, true);
     } else {
-      xhr.open(type, url+"?path="+dataToSend.path, false);
+      xhr.open(type, url+"?path="+dataToSend.path, true);
     }
     xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8;');
     xhr.setRequestHeader('Authorization', this.appToken);
     //xhr.withCredentials = true;
     xhr.onreadystatechange = function() {
+      var err = "";
       if(xhr.readyState == 4) {
-        return xhr.responseText;
-      } else {
-        console.error("Request failed. Status " + xhr.status);
+        if(xhr.status == 200) {
+          err = null;
+          callback(err, JSON.parse(xhr.responseText));
+        } else {
+          err = xhr.status;
+          callback(err, xhr.responseText);
+        }
       }
     };
     xhr.send(dataToSend);
     return xhr.responseText;
   };
 
-  this.save = function(path, data) {
+  this.save = function(path, data, callback) {
     var dataToSend = {
       path : path,
       data : data
     };
-    return this.sendRequest("http://"+this.baseUrl +"data/"+this.username+"/"+this.appName, "POST", JSON.stringify(dataToSend));
+    this.sendRequest("http://"+this.baseUrl +"/data/"+this.username+"/"+this.appName, "POST", JSON.stringify(dataToSend), callback);
   };
 
-  this.read = function(path) {
+  this.read = function(path, callback) {
     var dataToSend = {
       path : path
     };
-    return this.sendRequest("http://"+this.baseUrl +"data/"+this.username+"/"+this.appName, "GET", dataToSend);
+    this.sendRequest("http://"+this.baseUrl +"/data/"+this.username+"/"+this.appName, "GET", dataToSend, callback);
   };
 
-  this.delete = function(path, data) {
+  this.delete = function(path, callback) {
     var dataToSend = {
-      path : path,
-      data : data
+      path : path
     };
 
-    return this.sendRequest("http://"+this.baseUrl +'data/' + this.username + '/' + this.appName, "DELETE", JSON.stringify(dataToSend));
+    this.sendRequest("http://"+this.baseUrl +'/data/' + this.username + '/' + this.appName, "DELETE", JSON.stringify(dataToSend), callback);
   };
 
   this.sync = function() {
@@ -64,32 +68,36 @@ function Ease(username, appName, appToken) {
       this.connect();
     }
 
+    var dataToSend = {
+        username: this.username,
+        appName: application,
+        authorization: this.appToken
+    };
+
     if(this.conn.readyState === 1) {
-      var dataToSend = {
-          username: ease.username,
-          application: application
-      };
-      this.conn.send(dataToSend);
+      this.conn.send(JSON.stringify(dataToSend));
     } else {
-      this.setCallback(this.conn.send, application);
+      this.setCallback(dataToSend);
     }
   };
 
   this.connect = function(application) {
     var currentEase = this;
-    currentEase.conn = new WebSocket("ws://"+this.baseUrl+":8000/sub");
+    currentEase.conn = new WebSocket("ws://ease-62q56ueo.cloudapp.net:8000/sub");
     currentEase.conn.onclose = function(e) {
       console.log("Connection closed");
     };
     currentEase.conn.onmessage = function(e) {
-      //To be refactored
+      console.log(e.data);
+      return e.data;
     };
   };
 
   this.setCallback = function(argument) {
-    if(this.conn.readyState === 1) {
-      this.conn.send(argument);
+    if(this.conn.readyState == 1) {
+      this.conn.send(JSON.stringify(argument));
     } else {
+      console.log("Not Ready");
       var that = this;
       setTimeout(function () {
         that.setCallback(argument);
