@@ -1,6 +1,6 @@
 <div id="selected-app-header">
   <h1>App {{app.name}}</h1>
-  <h2>Endpoint: {{$stateParams}}</h2>
+  <span>{{$stateParams}}</span>
   <md-menu id="settings-menu" md-position-mode="target-right target">
     <md-button aria-label="Open menu" class="md-icon-button no-outline" ng-click="$mdOpenMenu($event)">
       <md-icon aria-label="Settings" md-svg-src="assets/images/settings-icon.svg"></md-icon>
@@ -22,8 +22,8 @@
   </md-menu>
 <div>
 <md-progress-circular ng-hide="data" md-mode="indeterminate" md-diameter="90"></md-progress-circular>
-<p>{{data()}}</p>
-<p style="text-align:center;" ng-show="data().length ==0">No application data!</p>
+<p>{{data}}</p>
+<p style="text-align:center;" ng-show="data.length ==0">No application data!</p>
 <!--<script type="text/ng-template" id="nodes_renderer.html">
   <div ui-tree-handle class="tree-node tree-node-content">
     <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)"><span
@@ -42,10 +42,10 @@
     <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
     </li>
   </ol>
-</script>-->
+</script>
 <div ui-tree id="tree-root" data-nodrop-enabled="true" data-clone-enabled="false" data-drag-enabled="false">
-  <!--<ol ui-tree-nodes ng-model="data">
+  <ol ui-tree-nodes ng-model="data">
     <li ng-repeat="node in data" ui-tree-node ng-include="'nodes_renderer.html'"></li>
   </ol>-->
   <md-button id="add-tree-data-item" class="md-primary md-raised" ng-click="newSubItem(this)">Add New Data Item</md-button>
-</div>
+<!--</div>-->

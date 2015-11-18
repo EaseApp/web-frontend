@@ -77,13 +77,13 @@ function($scope, $mdDialog, $stateParams, AuthService, $http, $state, UrlService
     $scope.$broadcast('expandAll');
   };
   
-  $scope.data = function(){
-    
-  };
-  
   var init = function(){
-    var response = app.read("/users");
-    $scope.data.push(JSON.parse(response));
+    app.read("/", function(err,response){
+      console.log(err);
+      console.log(response);
+      $scope.data.push(response);  
+    });
+    
   };
   init();
 
