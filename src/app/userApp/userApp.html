@@ -23,7 +23,7 @@
 <div>
 <md-progress-circular ng-hide="data" md-mode="indeterminate" md-diameter="90"></md-progress-circular>
 <p>{{data()}}</p>
-<p style="text-align:center;" ng-show="data().length ==0">No application data!</p>
+<p class="center-text" ng-show="data().length ==0">No application data!</p>
 <!--<script type="text/ng-template" id="nodes_renderer.html">
   <div ui-tree-handle class="tree-node tree-node-content">
     <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)"><span
