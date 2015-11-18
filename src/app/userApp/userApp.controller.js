@@ -4,10 +4,14 @@ angular.module('easeApp').controller('UserAppController',
 '$stateParams',
 'AuthService',
 '$http',
-function($scope, $mdDialog, $stateParams, AuthService, $http){
+'$state',
+'UrlService',
+function($scope, $mdDialog, $stateParams, AuthService, $http, $state, UrlService){
   $scope.app =  $stateParams;
   var user = AuthService.user();
   var app = new Ease(user.name, $stateParams.name, $stateParams.token);
+  var baseUrl = UrlService;
+  $scope.data = [];
 
   $scope.showConfirmClear = function(ev) {
     // Appending dialog to document.body to cover sidenav in docs app
@@ -21,6 +25,7 @@ function($scope, $mdDialog, $stateParams, AuthService, $http){
           .clickOutsideToClose(true);
     $mdDialog.show(confirm).then(function() {
         // Clear application (Call delete on root path to clear the application)
+        app.delete("/", null);
     });
   };
 
@@ -35,7 +40,10 @@ function($scope, $mdDialog, $stateParams, AuthService, $http){
           .cancel('Cancel')
           .clickOutsideToClose(true);
     $mdDialog.show(confirm).then(function() {
-      // $http
+      $http.defaults.headers.common['Authorization'] = AuthService.user().token;
+      $http.delete(baseUrl+'/users/applications/'+$stateParams.name).success(function(response){
+        $state.go('dashboard');
+      });
     });
   };
 
@@ -70,58 +78,14 @@ function($scope, $mdDialog, $stateParams, AuthService, $http){
   };
   
   $scope.data = function(){
-    var response = app.read("/users");
-    return [JSON.parse(response)];
+    
   };
-
-  // $scope.data = [{
-  //   'id': 1,
-  //   'title': 'node1',
-  //   'nodes': [
-  //     {
-  //       'id': 11,
-  //       'title': 'node1.1',
-  //       'nodes': [
-  //         {
-  //           'id': 111,
-  //           'title': 'node1.1.1',
-  //           'nodes': []
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       'id': 12,
-  //       'title': 'node1.2',
-  //       'nodes': []
-  //     }
-  //   ]
-  // }, {
-  //   'id': 2,
-  //   'title': 'node2',
-  //   'nodrop': true, // An arbitrary property to check in custom template for nodrop-enabled
-  //   'nodes': [
-  //     {
-  //       'id': 21,
-  //       'title': 'node2.1',
-  //       'nodes': []
-  //     },
-  //     {
-  //       'id': 22,
-  //       'title': 'node2.2',
-  //       'nodes': []
-  //     }
-  //   ]
-  // }, {
-  //   'id': 3,
-  //   'title': 'node3',
-  //   'nodes': [
-  //     {
-  //       'id': 31,
-  //       'title': 'node3.1',
-  //       'nodes': []
-  //     }
-  //   ]
-  // }];
+  
+  var init = function(){
+    var response = app.read("/users");
+    $scope.data.push(JSON.parse(response));
+  };
+  init();
 
 }])
 .run((['$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams){

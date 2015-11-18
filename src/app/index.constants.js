@@ -10,7 +10,8 @@
     })
     .constant('BASE_URL', {
       localhost: 'http://localhost:3000',
-      prod: 'http://ease-62q56ueo.cloudapp.net'
+      prod: 'http://ease-62q56ueo.cloudapp.net:3001',
+      prodLocal: 'http://localhost:3001'
     });
 
 })();
