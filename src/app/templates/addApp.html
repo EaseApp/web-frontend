@@ -17,9 +17,10 @@
         <div ng-message="required">Required</div>
       </div>
      </md-input-container>
-     <md-button class="md-primary md-raised" ng-click="submitted=true" type="submit">
+     <md-button class="md-primary md-raised" ng-click="submitted=true" type="submit" ng-hide="loading">
        Create
      </md-button>
+     <md-progress-circular ng-hide="!loading" md-mode="indeterminate" md-diameter="60"></md-progress-circular>
    </form>
   </md-dialog-content>
 </md-dialog>

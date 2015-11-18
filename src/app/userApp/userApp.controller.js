@@ -2,8 +2,12 @@ angular.module('easeApp').controller('UserAppController',
 ['$scope',
 '$mdDialog',
 '$stateParams',
-function($scope, $mdDialog,$stateParams){
+'AuthService',
+'$http',
+function($scope, $mdDialog, $stateParams, AuthService, $http){
   $scope.app =  $stateParams;
+  var user = AuthService.user();
+  var app = new Ease(user.name, $stateParams.name, $stateParams.token);
 
   $scope.showConfirmClear = function(ev) {
     // Appending dialog to document.body to cover sidenav in docs app
@@ -16,9 +20,7 @@ function($scope, $mdDialog,$stateParams){
           .cancel('Cancel')
           .clickOutsideToClose(true);
     $mdDialog.show(confirm).then(function() {
-      $scope.status = 'cleared';
-    }, function() {
-      $scope.status = 'canceled';
+        // Clear application (Call delete on root path to clear the application)
     });
   };
 
@@ -33,9 +35,7 @@ function($scope, $mdDialog,$stateParams){
           .cancel('Cancel')
           .clickOutsideToClose(true);
     $mdDialog.show(confirm).then(function() {
-      $scope.status = 'deleted';
-    }, function() {
-      $scope.status = 'canceled';
+      // $http
     });
   };
 
@@ -68,55 +68,60 @@ function($scope, $mdDialog,$stateParams){
   $scope.expandAll = function () {
     $scope.$broadcast('expandAll');
   };
+  
+  $scope.data = function(){
+    var response = app.read("/users");
+    return [JSON.parse(response)];
+  };
 
-  $scope.data = [{
-    'id': 1,
-    'title': 'node1',
-    'nodes': [
-      {
-        'id': 11,
-        'title': 'node1.1',
-        'nodes': [
-          {
-            'id': 111,
-            'title': 'node1.1.1',
-            'nodes': []
-          }
-        ]
-      },
-      {
-        'id': 12,
-        'title': 'node1.2',
-        'nodes': []
-      }
-    ]
-  }, {
-    'id': 2,
-    'title': 'node2',
-    'nodrop': true, // An arbitrary property to check in custom template for nodrop-enabled
-    'nodes': [
-      {
-        'id': 21,
-        'title': 'node2.1',
-        'nodes': []
-      },
-      {
-        'id': 22,
-        'title': 'node2.2',
-        'nodes': []
-      }
-    ]
-  }, {
-    'id': 3,
-    'title': 'node3',
-    'nodes': [
-      {
-        'id': 31,
-        'title': 'node3.1',
-        'nodes': []
-      }
-    ]
-  }];
+  // $scope.data = [{
+  //   'id': 1,
+  //   'title': 'node1',
+  //   'nodes': [
+  //     {
+  //       'id': 11,
+  //       'title': 'node1.1',
+  //       'nodes': [
+  //         {
+  //           'id': 111,
+  //           'title': 'node1.1.1',
+  //           'nodes': []
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       'id': 12,
+  //       'title': 'node1.2',
+  //       'nodes': []
+  //     }
+  //   ]
+  // }, {
+  //   'id': 2,
+  //   'title': 'node2',
+  //   'nodrop': true, // An arbitrary property to check in custom template for nodrop-enabled
+  //   'nodes': [
+  //     {
+  //       'id': 21,
+  //       'title': 'node2.1',
+  //       'nodes': []
+  //     },
+  //     {
+  //       'id': 22,
+  //       'title': 'node2.2',
+  //       'nodes': []
+  //     }
+  //   ]
+  // }, {
+  //   'id': 3,
+  //   'title': 'node3',
+  //   'nodes': [
+  //     {
+  //       'id': 31,
+  //       'title': 'node3.1',
+  //       'nodes': []
+  //     }
+  //   ]
+  // }];
 
 }])
 .run((['$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams){
