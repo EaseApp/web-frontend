@@ -825,3 +825,7 @@ md-sidenav.md-locked-open {
 .angular-ui-tree-empty {
   display: none;
 }
+
+.center-text {
+  text-align: center;
+}
