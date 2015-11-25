@@ -1,5 +1,7 @@
 angular.module('easeApp').factory('AuthService', function($http, $location, $state, $mdDialog, $cookies, md5, UrlService, $mdToast ){
 	var service = { user: {} };
+  var LOCAL_TOKEN_KEY = 'EaseApp';
+  var isAuthenticated = false;
 
 	var login = function(data){
 		var loginUrl = UrlService + "/users/sign_in";
@@ -8,7 +10,6 @@ angular.module('easeApp').factory('AuthService', function($http, $location, $sta
 				var emailHash = md5.createHash(response.username || '');
 				var user = {name: response.username, token: response.api_token, emailHash: emailHash};
 				storeUserCredentials(user);
-				$http.defaults.headers.common['Authorization'] = service.user.token;
 				$mdDialog.hide();
 				$location.url('/dashboard');
 			})
@@ -24,7 +25,6 @@ angular.module('easeApp').factory('AuthService', function($http, $location, $sta
 				var emailHash = md5.createHash(response.username || '');
 				var user = {name: response.username, token: response.api_token, emailHash: emailHash};
 				storeUserCredentials(user);
-				$http.defaults.headers.common['Authorization'] = service.user.token;
 				$mdDialog.hide();
 				$location.url('/dashboard');
 			})
@@ -42,9 +42,6 @@ angular.module('easeApp').factory('AuthService', function($http, $location, $sta
 		}
 	};
 
-	var LOCAL_TOKEN_KEY = 'EaseApp';
-	var isAuthenticated = false;
-
 	var loadUserCredentials = function() {
 		var windowUser = window.localStorage.getItem(LOCAL_TOKEN_KEY);
 		if (windowUser) {
@@ -53,7 +50,6 @@ angular.module('easeApp').factory('AuthService', function($http, $location, $sta
 	};
 
 	function storeUserCredentials(token) {
-		console.log('stored',token);
 		window.localStorage.setItem(LOCAL_TOKEN_KEY, JSON.stringify(token));
 		useCredentials(token);
 	}
@@ -65,7 +61,7 @@ angular.module('easeApp').factory('AuthService', function($http, $location, $sta
 		service.user.emailHash = user.emailHash;
 
 		// Set the token as header for your requests!
-		$http.defaults.headers.common['Authorization'] = user.token;
+		$http.defaults.headers.common.Authorization = user.token;
 	}
 
 	function destroyUserCredentials() {
@@ -80,7 +76,6 @@ angular.module('easeApp').factory('AuthService', function($http, $location, $sta
 		logout: logout,
 		register: register,
 		isAuthenticated: function(){return isAuthenticated;},
-		loadUserCredentials: loadUserCredentials,
 		user: function(){
 			loadUserCredentials();
 			return service.user;

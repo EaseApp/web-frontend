@@ -1,3 +1,6 @@
+(function(){
+'use strict';
+
 angular.module('easeApp').controller('UserAppController',
 ['$scope',
 '$mdDialog',
@@ -76,14 +79,14 @@ function($scope, $mdDialog, $stateParams, AuthService, $http, $state, UrlService
   $scope.expandAll = function () {
     $scope.$broadcast('expandAll');
   };
-  
+
   var init = function(){
     app.read("/", function(err,response){
       console.log(err);
       console.log(response);
-      $scope.data.push(response);  
+      $scope.data.push(response);
     });
-    
+
   };
   init();
 
@@ -92,3 +95,5 @@ function($scope, $mdDialog, $stateParams, AuthService, $http, $state, UrlService
   $rootScope.$state = $state;
   $rootScope.$stateParams = $stateParams;
 }]));
+
+})()

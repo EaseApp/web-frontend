@@ -9,7 +9,7 @@
       notAuthorized: 'auth-not-authorized'
     })
     .constant('BASE_URL', {
-      localhost: 'http://localhost:3000',
+      localhost: 'http://localhost:3001',
       prod: 'http://ease-62q56ueo.cloudapp.net:3001',
       prodLocal: 'http://localhost:3001'
     });
