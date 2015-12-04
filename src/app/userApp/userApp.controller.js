@@ -12,7 +12,7 @@ angular.module('easeApp').controller('UserAppController',
 function($scope, $mdDialog, $stateParams, AuthService, $http, $state, UrlService){
   $scope.app =  $stateParams;
   var user = AuthService.user();
-  var app = new Ease(user.name, $stateParams.name, $stateParams.token);
+  var app = new Ease(user.name, $stateParams.name, $stateParams.token, true);
   var baseUrl = UrlService;
   $scope.data = [];
 
@@ -28,8 +28,9 @@ function($scope, $mdDialog, $stateParams, AuthService, $http, $state, UrlService
           .clickOutsideToClose(true);
     $mdDialog.show(confirm).then(function() {
         // Clear application (Call delete on root path to clear the application)
-        app.delete("/", null);
+        app.delete("/", null, {});
     });
+    $scope.data = [];
   };
 
   $scope.showConfirmDelete = function(ev) {
@@ -45,7 +46,7 @@ function($scope, $mdDialog, $stateParams, AuthService, $http, $state, UrlService
     $mdDialog.show(confirm).then(function() {
       $http.defaults.headers.common['Authorization'] = AuthService.user().token;
       $http.delete(baseUrl+'/users/applications/'+$stateParams.name).success(function(response){
-        $state.go('dashboard');
+        $state.go('dashboard', {}, {reload: true});
       });
     });
   };
@@ -63,14 +64,6 @@ function($scope, $mdDialog, $stateParams, AuthService, $http, $state, UrlService
     $scope.data.splice(0, 0, a);
   };
 
-  $scope.newSubItem = function (scope) {
-    var nodeData = scope.$modelValue;
-    nodeData.nodes.push({
-      id: nodeData.id * 10 + nodeData.nodes.length,
-      title: nodeData.title + '.' + (nodeData.nodes.length + 1),
-      nodes: []
-    });
-  };
 
   $scope.collapseAll = function () {
     $scope.$broadcast('collapseAll');
@@ -80,12 +73,29 @@ function($scope, $mdDialog, $stateParams, AuthService, $http, $state, UrlService
     $scope.$broadcast('expandAll');
   };
 
+  var parseResponse = function(data){
+    var arr = [];
+    for(var prop in data){
+      var object  = {};
+      object.title = prop;
+      if(typeof data[prop] == 'object'){
+        object.children = parseResponse(data[prop]);
+      } else {
+        object.content = data[prop];
+      }
+      arr.push(object);
+    }
+    console.log(arr);
+    return arr;
+  };
+
   var init = function(){
     app.read("/", function(err,response){
-      console.log(err);
-      console.log(response);
-      $scope.data.push(response);
+      if(Object.keys(response).length > 0 && err == undefined){
+        $scope.data = parseResponse(response);
+      }
     });
+
 
   };
   init();
