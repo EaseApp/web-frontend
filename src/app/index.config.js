@@ -18,10 +18,8 @@
       name : 'AppParam',
       decode: function(val)  { return typeof(val) ==="string" ? JSON.parse(val) : val;},
       encode: function(val)  { return JSON.stringify(val); },
-      equals: function(a, b) { return this.is(a) && this.is(b) 
-                                    && a.name === b.name && a.id == b.id; },
-      is: function(val)      { return angular.isObject(val) 
-                                    && "status" in val && "type" in val; },
+      equals: function(a, b) { return this.is(a) && this.is(b) && a.name === b.name && a.id === b.id; },
+      is: function(val)      { return angular.isObject(val) && "status" in val && "type" in val; },
     });
   };
 })();

@@ -1,13 +1,20 @@
+(function(){
+'use strict';
+
 angular.module('easeApp').controller('UserAppController',
 ['$scope',
 '$mdDialog',
 '$stateParams',
 'AuthService',
 '$http',
-function($scope, $mdDialog, $stateParams, AuthService, $http){
+'$state',
+'UrlService',
+function($scope, $mdDialog, $stateParams, AuthService, $http, $state, UrlService){
   $scope.app =  $stateParams;
   var user = AuthService.user();
-  var app = new Ease(user.name, $stateParams.name, $stateParams.token);
+  var app = new Ease(user.name, $stateParams.name, $stateParams.token, true);
+  var baseUrl = UrlService;
+  $scope.data = [];
 
   $scope.showConfirmClear = function(ev) {
     // Appending dialog to document.body to cover sidenav in docs app
@@ -21,7 +28,9 @@ function($scope, $mdDialog, $stateParams, AuthService, $http){
           .clickOutsideToClose(true);
     $mdDialog.show(confirm).then(function() {
         // Clear application (Call delete on root path to clear the application)
+        app.delete("/", null, {});
     });
+    $scope.data = [];
   };
 
   $scope.showConfirmDelete = function(ev) {
@@ -35,7 +44,10 @@ function($scope, $mdDialog, $stateParams, AuthService, $http){
           .cancel('Cancel')
           .clickOutsideToClose(true);
     $mdDialog.show(confirm).then(function() {
-      // $http
+      $http.defaults.headers.common['Authorization'] = AuthService.user().token;
+      $http.delete(baseUrl+'/users/applications/'+$stateParams.name).success(function(response){
+        $state.go('dashboard', {}, {reload: true});
+      });
     });
   };
 
@@ -52,14 +64,6 @@ function($scope, $mdDialog, $stateParams, AuthService, $http){
     $scope.data.splice(0, 0, a);
   };
 
-  $scope.newSubItem = function (scope) {
-    var nodeData = scope.$modelValue;
-    nodeData.nodes.push({
-      id: nodeData.id * 10 + nodeData.nodes.length,
-      title: nodeData.title + '.' + (nodeData.nodes.length + 1),
-      nodes: []
-    });
-  };
 
   $scope.collapseAll = function () {
     $scope.$broadcast('collapseAll');
@@ -68,63 +72,38 @@ function($scope, $mdDialog, $stateParams, AuthService, $http){
   $scope.expandAll = function () {
     $scope.$broadcast('expandAll');
   };
-  
-  $scope.data = function(){
-    var response = app.read("/users");
-    return [JSON.parse(response)];
+
+  var parseResponse = function(data){
+    var arr = [];
+    for(var prop in data){
+      var object  = {};
+      object.title = prop;
+      if(typeof data[prop] == 'object'){
+        object.children = parseResponse(data[prop]);
+      } else {
+        object.content = data[prop];
+      }
+      arr.push(object);
+    }
+    console.log(arr);
+    return arr;
   };
 
-  // $scope.data = [{
-  //   'id': 1,
-  //   'title': 'node1',
-  //   'nodes': [
-  //     {
-  //       'id': 11,
-  //       'title': 'node1.1',
-  //       'nodes': [
-  //         {
-  //           'id': 111,
-  //           'title': 'node1.1.1',
-  //           'nodes': []
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       'id': 12,
-  //       'title': 'node1.2',
-  //       'nodes': []
-  //     }
-  //   ]
-  // }, {
-  //   'id': 2,
-  //   'title': 'node2',
-  //   'nodrop': true, // An arbitrary property to check in custom template for nodrop-enabled
-  //   'nodes': [
-  //     {
-  //       'id': 21,
-  //       'title': 'node2.1',
-  //       'nodes': []
-  //     },
-  //     {
-  //       'id': 22,
-  //       'title': 'node2.2',
-  //       'nodes': []
-  //     }
-  //   ]
-  // }, {
-  //   'id': 3,
-  //   'title': 'node3',
-  //   'nodes': [
-  //     {
-  //       'id': 31,
-  //       'title': 'node3.1',
-  //       'nodes': []
-  //     }
-  //   ]
-  // }];
+  var init = function(){
+    app.read("/", function(err,response){
+      if(Object.keys(response).length > 0 && err == undefined){
+        $scope.data = parseResponse(response);
+      }
+    });
+
+
+  };
+  init();
 
 }])
 .run((['$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams){
   $rootScope.$state = $state;
   $rootScope.$stateParams = $stateParams;
 }]));
+
+})()
