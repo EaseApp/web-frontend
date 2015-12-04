@@ -20,3 +20,6 @@ Then
 
 ## Running Server
 `gulp serve` - Will launch the server and open a tab in Chrome at the appropriate address.
+
+## Documentation link
+[Documentation](https://github.com/EaseApp/web-backend)
