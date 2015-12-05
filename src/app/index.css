@@ -310,7 +310,7 @@ md-toolbar {
 .info-list {
   display: inline-block;
   font-size: 20px;
-  font-weight: 100;
+  font-weight: 400;
   margin: 10px auto 25px auto;
   text-align: left;
 }
@@ -327,7 +327,7 @@ md-toolbar {
 
 #pricing p {
   font-size: 75px;
-  font-weight: 100;
+  font-weight: 400;
 }
 
 #docs {
@@ -336,7 +336,7 @@ md-toolbar {
 
 #docs .section-sub-header {
   text-align: center;
-  font-weight: 100;
+  font-weight: 400;
   color: rgb(180,180,180);
   margin: 25px 0px 0px 0px;
 }
@@ -360,7 +360,7 @@ md-toolbar {
 }
 
 .grid-list-item h3 {
-  font-weight: 100;
+  font-weight: 400;
   margin: 15px 0px 0px 0px;
 }
 
@@ -428,7 +428,7 @@ md-toolbar {
 
 .section-title {
   margin: 10px 0px;
-  font-weight: 100;
+  font-weight: 400;
   text-align: center;
 }
 
@@ -611,6 +611,7 @@ md-grid-tile {
   background: rgb(120,120,120);
   transition: all 400ms ease-out 50ms;
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.14), 0px 2px 2px 0px rgba(0, 0, 0, 0.098), 0px 1px 5px 0px rgba(0, 0, 0, 0.084);
+  overflow: hidden;
 }
 
 .app-link-wrapper {
@@ -633,11 +634,6 @@ md-grid-tile-footer {
   margin: 0px;
   padding-right: 42px;
   word-wrap: break-word;
-}
-
-#selected-app-header h2 {
-  font-size: 16px;
-  font-weight: 100;
 }
 
 #selected-app-header #settings-menu {
