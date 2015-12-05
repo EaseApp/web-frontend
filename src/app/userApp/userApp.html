@@ -21,8 +21,8 @@
     </md-menu-content>
   </md-menu>
 </div>
-<md-progress-circular ng-hide="data" md-mode="indeterminate" md-diameter="90"></md-progress-circular>
-<p style="text-align:center;" ng-show="data.length == 0">No application data!</p>
+<md-progress-circular ng-hide="!loading" md-mode="indeterminate" md-diameter="90"></md-progress-circular>
+<p style="text-align:center;" ng-hide="loading || data.length > 0">No application data!</p>
 
 <script type="text/ng-template" id="nodes_renderer.html">
   <div ui-tree-handle class="tree-node tree-node-content">

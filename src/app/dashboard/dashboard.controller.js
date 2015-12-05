@@ -81,4 +81,13 @@ function($scope, $state, $mdSidenav, $mdDialog, AuthService, AUTH_EVENTS, UrlSer
   };
   init();
 
+  $scope.getColor = function(val) {
+    if(val < 50) { return "green"}
+    else if (val < 68) { return "blue"}
+    else if (val < 86) { return "purple"}
+    else if (val < 104) { return "orange"}
+    else if (val < 120) { return "red"}
+    else { return "midnight"}
+  }
+
 }]);

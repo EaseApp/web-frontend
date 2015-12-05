@@ -1,4 +1,4 @@
-@import url(//fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
+@import url(//fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:100,400,700,700italic,400italic);
 
 @font-face {
     font-family: Glyphicons Halflings;
@@ -828,4 +828,53 @@ md-sidenav.md-locked-open {
 
 .center-text {
   text-align: center;
+}
+
+#dashboard-apps md-grid-tile md-grid-tile-footer figcaption {
+  width: 100%;
+}
+
+#dashboard-apps md-grid-tile md-grid-tile-footer h3 {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0px;
+  padding: 0px 10px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#dashboard-apps md-grid-tile h1 {
+  display: inline-block;
+  background: none;
+  padding: 25px;
+  border-radius: 50%;
+  margin: 50px 0px;
+  height: 100px;
+  width: 100px;
+  font-size: 100px;
+  font-weight: 100;
+  text-transform: uppercase;
+}
+
+#dashboard-apps md-grid-tile h1.green {
+  background: #27ae60;
+}
+#dashboard-apps md-grid-tile h1.blue {
+  background: #3498db;
+}
+#dashboard-apps md-grid-tile h1.purple {
+  background: #8e44ad;
+}
+#dashboard-apps md-grid-tile h1.orange {
+  background: #e67e22;
+}
+#dashboard-apps md-grid-tile h1.red {
+  background: #e74c3c;
+}
+#dashboard-apps md-grid-tile h1.midnight {
+  background: #2c3e50;
 }
