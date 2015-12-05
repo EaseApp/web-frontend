@@ -15,6 +15,8 @@ function($scope, $mdDialog, $stateParams, AuthService, $http, $state, UrlService
   var app = new Ease(user.name, $stateParams.name, $stateParams.token, true);
   var baseUrl = UrlService;
   $scope.data = [];
+  $scope.initialLoad = true;
+
 
   $scope.showConfirmClear = function(ev) {
     // Appending dialog to document.body to cover sidenav in docs app
@@ -85,16 +87,34 @@ function($scope, $mdDialog, $stateParams, AuthService, $http, $state, UrlService
       }
       arr.push(object);
     }
-    console.log(arr);
     return arr;
   };
 
-  var init = function(){
-    app.read("/", function(err,response){
+  var getData = function(){
+    app.read("/", function(err, response){
       if(Object.keys(response).length > 0 && err == undefined){
         $scope.data = parseResponse(response);
       }
     });
+  };
+
+  var init = function(){
+    getData();
+
+    app.subscribe($stateParams.name);
+    app.conn.onmessage = function(event){
+      var data = JSON.parse(event.data);
+      if (data["action"] != null){
+       getData();
+      }
+    };
+    $scope.$watch('$scope.data', function(){
+      if(!$scope.initialLoad) {
+        getData();
+      }
+      $scope.initialLoad = false;
+    },true);
+
 
 
   };
