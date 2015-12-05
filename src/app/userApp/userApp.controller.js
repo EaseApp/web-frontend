@@ -32,8 +32,8 @@ function($scope, $mdDialog, $stateParams, AuthService, $http, $state, UrlService
     $mdDialog.show(confirm).then(function() {
         // Clear application (Call delete on root path to clear the application)
         app.delete("/", null, {});
+        $scope.data = [];
     });
-    $scope.data = [];
   };
 
   $scope.showConfirmDelete = function(ev) {
