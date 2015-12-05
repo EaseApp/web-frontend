@@ -95,6 +95,7 @@ function($scope, $mdDialog, $stateParams, AuthService, $http, $state, UrlService
     app.read("/", function(err, response){
       if(Object.keys(response).length > 0 && err == undefined){
         $scope.data = parseResponse(response);
+        $scope.$apply();
       }
       $scope.loading = false;
     });
@@ -105,11 +106,13 @@ function($scope, $mdDialog, $stateParams, AuthService, $http, $state, UrlService
 
     app.subscribe($stateParams.name);
     app.conn.onmessage = function(event){
+      console.log(event);
       var data = JSON.parse(event.data);
-      if (data["action"] != null){
-       getData();
+      if (data.action != null){
+        getData();
       }
     };
+
     $scope.$watch('$scope.data', function(){
       if(!$scope.initialLoad) {
         getData();
