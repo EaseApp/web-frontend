@@ -14,11 +14,6 @@
         controller: 'MainController',
         controllerAs: 'main',
         authenticate: true
-      }).state('docs', {
-        url: '/docs',
-        templateUrl: 'app/docs/docs.html',
-        controller: 'DocsController',
-        authenticate: false
       }).state('dashboard', {
         url: '/dashboard',
         templateUrl: 'app/dashboard/dashboard.html',
@@ -29,11 +24,6 @@
         templateUrl: 'app/userApp/userApp.html',
         controller: 'UserAppController',
         authenticate: true
-      }).state('login', {
-        url: '/login',
-        controller: 'LoginController',
-        templateUrl: 'app/login/login.html',
-        authenticate: false
       });
 
     $urlRouterProvider.otherwise('/');
